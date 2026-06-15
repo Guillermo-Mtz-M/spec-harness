@@ -1,0 +1,1 @@
+Run mutation testing on the implementation. Inject faults (arithmetic, logical, conditional, return, deletion mutations). Kill the mutants or fix the tests. Target mutation score >= 70%. Produce MUTATION_REPORT.md. After pass, ask human for Approval Gate #2.

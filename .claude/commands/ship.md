@@ -1,0 +1,1 @@
+Commit, create PR, update changelog, and prepare for deployment. All tests must pass. Review must be approved. Mutation score >= 70%. Human must have approved (Gate #2). Conventional commit messages, one commit per vertical slice.

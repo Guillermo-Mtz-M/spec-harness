@@ -1,0 +1,1 @@
+Systematic debug: reproduce the bug, minimize the reproducer, hypothesize the root cause, fix, and write a guard test that would catch it if it reoccurs. No fixing without a hypothesis. No closing without a guard test.

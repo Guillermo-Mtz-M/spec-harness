@@ -1,10 +1,10 @@
-# Spec-Harness | [中文](./i18n/README.zh.md) [Español](./README.es.md)
+# Spec-Harness | [中文](./README.zh.md) · [Español](./README.es.md)
 
 ![Stargazers](https://img.shields.io/github/stars/Guillermo-Mtz-M/spec-harness?style=flat)
 ![Forks](https://img.shields.io/github/forks/Guillermo-Mtz-M/spec-harness?style=flat)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Skills](https://img.shields.io/badge/skills-14-40c4ff)
-![Agents](https://img.shields.io/badge/agents-4-b48ead)
+![Skills](https://img.shields.io/badge/skills-15-40c4ff)
+![Agents](https://img.shields.io/badge/agents-5-b48ead)
 ![Integrations](https://img.shields.io/badge/integrations-5-66bb6a)
 
 **Spec-Driven Development + Harness Engineering for AI coding agents.**
@@ -12,8 +12,6 @@
 A composable skill system combining **Spec-Driven Development** (spec as source of truth) with **Harness Engineering** (automated guardrails, context minimization, verification loops) — designed by synthesizing real-world patterns from production AI workflows.
 
 Works with **Claude Code**, **Codex**, **OpenCode**, **Cursor**, **Gemini CLI**, and any agent that reads markdown skills.
-
-🇪🇸 [Lea en español](./README.es.md) | 🇬🇧 Read in English
 
 ---
 
@@ -33,34 +31,32 @@ Everything between gates is automated by the harness.
 ## Full Walkthrough (Examples)
 
 | Example | What it demonstrates |
-|---------|---------------------|
+|---------|----------------------|
 | [`examples/01-user-auth/`](examples/01-user-auth/) | Full flow: auth system with 4 requirements. All artifacts produced — SPEC.md, REVIEW.md, MUTATION_REPORT.md, implementation commits |
 | [`examples/02-api-rate-limit/`](examples/02-api-rate-limit/) | Minimal spec: API rate limiter middleware (2 requirements). Shows the flow scales down, not just up |
 
 ---
 
-## Quick Start | Inicio Rápido
+## Quick Start
 
-### 3 pasos | 3 Steps
+### 3 Steps
 
 ```bash
-# 1. Instalar / Install
+# 1. Install
 git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness && node scripts/install.js --target claude
 
-# 2. Entrevistar / Interview
-# Escribe /grill-me — el agente te pregunta qué quieres realmente
+# 2. Interview
 # Type /grill-me — the agent interrogates you about what you actually want
 
-# 3. Especificar / Specify
-# /spec-author escribe SPEC.md en EARS/Gherkin
+# 3. Specify
 # /spec-author writes SPEC.md in EARS/Gherkin
 # → [HUMAN APPROVES]
-# → [Implementar / Implement]
-# → [Verificar / Verify]
+# → [Implement]
+# → [Verify]
 # → /ship
 ```
 
-### Supported Agents | Agentes Soportados
+### Supported Agents
 
 | Agent | Install |
 |-------|---------|
@@ -71,7 +67,7 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 
 ---
 
-## The Workflow | El Flujo
+## The Workflow
 
 ```
   SPECIFY          REVIEW           BUILD           VERIFY           SHIP
@@ -79,17 +75,17 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
  │ grills │ ───▶ │  spec  │ ───▶ │   TDD  │ ───▶ │ judge  │ ───▶ │  human │
  │  user  │      │ review │      │  loop  │      │ mutate │      │ approve│
  └────────┘      └────────┘      └────────┘      └────────┘      └────────┘
-  /grill-me        /spec-review    /implement       /mutation-test   /ship
-       └──── /spec-author ────┘   └──── /tdd-loop ─┘   └── /reviewer ─┘
+   /grill-me       /spec-review     /implement       /mutation-test    /ship
+        └──── /spec-author ────┘   └──── /tdd-loop ─┘   └── /reviewer ─┘
 ```
 
 **Human approval gates (2 only):**
-1. **After spec** — "Is this what I want?" / "¿Es esto lo que quiero?"
-2. **After verification** — "Does it work?" / "¿Funciona?"
+1. **After spec** — "Is this what I want?"
+2. **After verification** — "Does it work?"
 
 ---
 
-## Skills (14)
+## Skills (15)
 
 | Skill | What it does | When to use |
 |-------|-------------|-------------|
@@ -99,7 +95,8 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 | `/implement` | Thin vertical slices with TDD, commit per slice | Spec approved, time to build |
 | `/tdd-loop` | RED-GREEN-REFACTOR with verification gates | During implementation |
 | `/reviewer` | Judge: does the code satisfy the spec? | After implementation |
-| `/mutation-test` | Kill mutants or fix tests (≥70% score required) | After reviewer approves |
+| `/council-review` | 3 anonymous specialist reviews (spec, performance, security) → chairman synthesis | After reviewer, before mutation-test |
+| `/mutation-test` | Kill mutants or fix tests (≥70% score required) | After council-review approves |
 | `/ship` | Commit, PR, changelog, deploy checklist | Everything verified |
 | `/context-engineer` | Minimize context, progressive loading, external memory | Session start, context bloat |
 | `/subagent-driven-dev` | Dispatch fresh agents per task via artifacts | Multi-slice specs |
@@ -122,7 +119,7 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 
 ---
 
-## Agents (4)
+## Agents (5)
 
 | Agent | Role | Verdict |
 |-------|------|---------|
@@ -130,6 +127,7 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 | [`implementer`](agents/implementer.md) | Senior Developer | TDD, YAGNI, surgical changes |
 | [`judge`](agents/judge.md) | Code Reviewer | PASS / FAIL / PARTIAL per requirement |
 | [`mutation-tester`](agents/mutation-tester.md) | QA Adversary | Mutation score ≥ 70% |
+| [`council-chairman`](agents/council-chairman.md) | Synthesis Arbiter | Unified verdict from anonymous reviews |
 
 ---
 
@@ -152,8 +150,8 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 
 ```
 spec-harness/
-├── skills/               # 14 skills (core workflow)
-├── agents/               # 4 specialist personas
+├── skills/               # 15 skills (core workflow)
+├── agents/               # 5 specialist personas
 ├── integrations/         # 5 external tool integrations
 ├── templates/            # 5 artifact templates
 │   ├── SPEC.md           # EARS/Gherkin contract
@@ -163,7 +161,7 @@ spec-harness/
 ├── references/           # 4 supplementary checklists
 ├── rules/                # Always-follow guidelines (common, ts, python)
 ├── docs/                 # Setup guides (Claude, OpenCode, Cursor, Gemini)
-├── .claude/commands/     # 8 slash commands for Claude Code
+├── .claude/commands/     # 9 slash commands for Claude Code
 └── scripts/              # install.js + validate.js
 ```
 
@@ -171,15 +169,16 @@ spec-harness/
 
 ## Comparison
 
-| Feature | Spec-Harness | mattpocock | agent-skills | ECC | BMAD |
-|---------|:-----------:|:----------:|:------------:|:---:|:----:|
-| EARS/Gherkin spec | ✅ Built-in | PRD | PRD | Commands | Full |
-| Harness Engineering | ✅ Context + memory | Context.md | Context skill | Hooks | Instincts |
-| Artifact handoffs | ✅ File-based | Handoff skill | N/A | Orchestrators | Party mode |
-| Mutation testing | ✅ Built-in | ❌ | ❌ | ❌ | TEA module |
-| Human approval gates | **2 only** | Per-task | Per-task | Per-cmd | Per-phase |
-| External integrations | 5 pre-wired | ❌ | ❌ | Plugin | Modules |
-| Agent personas | 4 | ❌ | 4 reviewers | 67 | 12+ |
+| Feature | Spec-Harness | mattpocock | agent-skills | ECC | BMAD | gstack |
+|---------|:-----------:|:----------:|:------------:|:---:|:----:|:------:|
+| EARS/Gherkin spec | ✅ Built-in | PRD | PRD | Commands | Full | PRD |
+| Harness Engineering | ✅ Context + memory | Context.md | Context skill | Hooks | Instincts | Context + memory |
+| Artifact handoffs | ✅ File-based | Handoff skill | N/A | Orchestrators | Party mode | Skill-based |
+| Mutation testing | ✅ Built-in | ❌ | ❌ | ❌ | TEA module | ❌ |
+| Human approval gates | **2 only** | Per-task | Per-task | Per-cmd | Per-phase | Per-skill |
+| External integrations | 5 pre-wired | ❌ | ❌ | Plugin | Modules | 23 skills |
+| Agent personas | 5 | ❌ | 4 reviewers | 67 | 12+ | 23 specialists |
+| Multi-review council | ✅ /council-review | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -193,5 +192,5 @@ MIT — use in projects, teams, and tools.
 
 ## Acknowledgments
 
-Synthesized from 8 research documents on SDD/Harness/multiagent systems and 10 production reference repos:
-[mattpocock/skills](https://github.com/mattpocock/skills) · [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) · [affaan-m/ECC](https://github.com/affaan-m/ECC) · [obra/superpowers](https://github.com/obra/superpowers) · [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) · [safishamsi/graphify](https://github.com/safishamsi/graphify) · [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) · [upstash/context7](https://github.com/upstash/context7)
+Synthesized from 9 research documents on SDD/Harness/multiagent systems and 11 production reference repos:
+[mattpocock/skills](https://github.com/mattpocock/skills) · [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) · [affaan-m/ECC](https://github.com/affaan-m/ECC) · [garrytan/gstack](https://github.com/garrytan/gstack) · [obra/superpowers](https://github.com/obra/superpowers) · [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) · [safishamsi/graphify](https://github.com/safishamsi/graphify) · [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) · [upstash/context7](https://github.com/upstash/context7) · [karpathy/llm-council](https://github.com/karpathy/llm-council)

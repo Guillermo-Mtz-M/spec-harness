@@ -73,7 +73,7 @@ O copia manualmente los directorios `skills/` y `agents/` a la configuración de
 
 ---
 
-## Todos los Skills
+## Todos los Skills (15)
 
 ### Flujo Principal SDD
 
@@ -83,9 +83,10 @@ O copia manualmente los directorios `skills/` y `agents/` a la configuración de
 | [`/spec-author`](skills/spec-author/SKILL.md) | Escribe spec en EARS/Gherkin con criterios de aceptación | Después de grill-me, antes de código |
 | [`/spec-review`](skills/spec-review/SKILL.md) | Revisión independiente contra lista de ambigüedad | Antes de aprobar la spec |
 | [`/implement`](skills/implementer/SKILL.md) | Implementación incremental: slices verticales, commit por slice | Spec aprobada, lista para código |
-| [`/tdd-loop`](skills/tdd-loop/SKILL.md) | Red-Green-Refactor con gates de verificación | Durante implementación |
+| [`/tdd-loop`](skills/tdd-loop/SKILL.md) | RED-GREEN-REFACTOR con gates de verificación | Durante implementación |
 | [`/reviewer`](skills/reviewer/SKILL.md) | Fresh-context judge: ¿el código satisface la spec? | Después de implementación |
-| [`/mutation-test`](skills/mutation-tester/SKILL.md) | Mutation testing adversarial: mata los mutantes o arregla los tests | Después de que reviewer aprueba |
+| [`/council-review`](skills/council-review/SKILL.md) | 3 revisiones anónimas (spec, performance, seguridad) → síntesis de chairman | Después de reviewer, antes de mutation-test |
+| [`/mutation-test`](skills/mutation-tester/SKILL.md) | Mutation testing adversarial: mata los mutantes o arregla los tests | Después de que council-review aprueba |
 | [`/ship`](skills/ship/SKILL.md) | Commit, PR, changelog, checklist de deploy | Todo verificado |
 
 ### Harness Engineering
@@ -120,7 +121,7 @@ Skills pre-configurados de proyectos externos, listos para el flujo SDD:
 
 ---
 
-## Agentes Persona
+## Agentes Persona (5)
 
 Subagentes especialista para trabajo enfocado:
 
@@ -130,6 +131,7 @@ Subagentes especialista para trabajo enfocado:
 | [`implementer`](agents/implementer.md) | Senior Developer | Slices verticales, TDD, YAGNI, abstracciones mínimas |
 | [`judge`](agents/judge.md) | Code Reviewer | Cumplimiento de spec, no opiniones de estilo |
 | [`mutation-tester`](agents/mutation-tester.md) | QA Adversary | Mata los mutantes, expone tests débiles |
+| [`council-chairman`](agents/council-chairman.md) | Síntesis Arbitral | Veredicto unificado desde revisiones anónimas |
 
 ---
 
@@ -192,13 +194,14 @@ Toca solo lo que debes. No refactorizes código adyacente. Cada línea cambiada 
 
 ```
 spec-harness/
-├── skills/                        # 14 skills
+├── skills/                        # 15 skills
 │   ├── grill-me/
 │   ├── spec-author/
 │   ├── spec-review/
 │   ├── implementer/
 │   ├── tdd-loop/
 │   ├── reviewer/
+│   ├── council-review/
 │   ├── mutation-tester/
 │   ├── context-engineer/
 │   ├── subagent-driven-dev/
@@ -207,7 +210,7 @@ spec-harness/
 │   ├── zoom-out/
 │   ├── ship/
 │   └── using-spec-harness/
-├── agents/                        # 4 personas especialista
+├── agents/                        # 5 personas especialista
 ├── integrations/                   # 5 herramientas externas
 ├── templates/                      # 5 templates de artefactos
 ├── references/                     # 4 checklists de referencia
@@ -224,15 +227,16 @@ spec-harness/
 
 ## Comparación con Otros Sistemas
 
-| Feature | Spec-Harness | mattpocock/skills | addyosmani/agent-skills | ECC | BMAD-METHOD |
-|---------|-------------|-------------------|------------------------|-----|-------------|
-| Flujo spec-driven | EARS/Gherkin built-in | PRD-focused | PRD-focused | Commands | Full |
-| Harness Engineering | Context minimization, external memory | Context.md | Context engineering skill | Hooks + memory | Instincts |
-| Handoff entre subagentes | Por artefactos (ficheros) | Skill handoff | N/A | Orchestrators | Party mode |
-| Mutation testing | Skill built-in | No | No | No | TEA module |
-| Approval gates humanos | 2 (spec + resultado) | Por tarea | Por tarea | Por comando | Por fase |
-| Integraciones externas | 5 pre-conectadas | N/A | N/A | Plugin system | Module system |
-| Agentes persona | 4 (spec, impl, judge, tester) | N/A | 4 reviewers | 67 | 12+ |
+| Feature | Spec-Harness | mattpocock/skills | addyosmani/agent-skills | ECC | BMAD-METHOD | gstack |
+|---------|-------------|-------------------|------------------------|-----|-------------|--------|
+| Flujo spec-driven | EARS/Gherkin built-in | PRD-focused | PRD-focused | Commands | Full | PRD |
+| Harness Engineering | Context minimization, external memory | Context.md | Context engineering skill | Hooks + memory | Instincts | Context + memory |
+| Handoff entre subagentes | Por artefactos (ficheros) | Skill handoff | N/A | Orchestrators | Party mode | Skill-based |
+| Mutation testing | Skill built-in | No | No | No | TEA module | No |
+| Approval gates humanos | 2 (spec + resultado) | Por tarea | Por tarea | Por comando | Por fase | Por skill |
+| Integraciones externas | 5 pre-conectadas | N/A | N/A | Plugin system | Module system | 23 skills |
+| Agentes persona | 5 (spec, impl, judge, tester, chairman) | N/A | 4 reviewers | 67 | 12+ | 23 specialists |
+| Council multi-revisión | ✅ /council-review | No | No | No | No | No |
 
 ---
 
@@ -246,5 +250,5 @@ MIT — usa estos skills en tus proyectos, equipos y herramientas.
 
 Construido sintetizando insights de:
 
-- **8 documentos de investigación** sobre SDD, Harness Engineering, sistemas multiagente, verificación, y human-on-the-loop
-- **10 repositorios de referencia**: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [affaan-m/ECC](https://github.com/affaan-m/ECC), [garrytan/gstack](https://github.com/garrytan/gstack), [obra/superpowers](https://github.com/obra/superpowers), [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [safishamsi/graphify](https://github.com/safishamsi/graphify), [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), [upstash/context7](https://github.com/upstash/context7), [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills)
+- **9 documentos de investigación** sobre SDD, Harness Engineering, sistemas multiagente, verificación, y human-on-the-loop
+- **11 repositorios de referencia**: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [affaan-m/ECC](https://github.com/affaan-m/ECC), [garrytan/gstack](https://github.com/garrytan/gstack), [obra/superpowers](https://github.com/obra/superpowers), [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [safishamsi/graphify](https://github.com/safishamsi/graphify), [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), [upstash/context7](https://github.com/upstash/context7), [karpathy/llm-council](https://github.com/karpathy/llm-council)

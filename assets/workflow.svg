@@ -1,0 +1,129 @@
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; border-radius: 12px;">
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" fill="#e6edf3" font-size="16" font-weight="600">Spec-Harness Workflow</text>
+  <text x="450" y="46" text-anchor="middle" fill="#8b949e" font-size="10">Spec-Driven Development + Harness Engineering</text>
+
+  <!-- Gate 1 indicator -->
+  <rect x="310" y="55" width="110" height="20" rx="4" fill="#1f6feb22" stroke="#1f6feb" stroke-width="1"/>
+  <text x="365" y="69" text-anchor="middle" fill="#58a6ff" font-size="9">HUMAN GATE #1</text>
+
+  <!-- Gate 2 indicator -->
+  <rect x="620" y="55" width="110" height="20" rx="4" fill="#1f6feb22" stroke="#1f6feb" stroke-width="1"/>
+  <text x="675" y="69" text-anchor="middle" fill="#58a6ff" font-size="9">HUMAN GATE #2</text>
+
+  <!-- Phase labels -->
+  <text x="70" y="120" text-anchor="middle" fill="#8b949e" font-size="9">SPECIFY</text>
+  <text x="180" y="120" text-anchor="middle" fill="#8b949e" font-size="9">REVIEW</text>
+  <text x="310" y="120" text-anchor="middle" fill="#8b949e" font-size="9">BUILD</text>
+  <text x="450" y="120" text-anchor="middle" fill="#8b949e" font-size="9">VERIFY</text>
+  <text x="620" y="120" text-anchor="middle" fill="#8b949e" font-size="9">SHIP</text>
+
+  <!-- Box: grill-me -->
+  <rect x="20" y="135" width="100" height="44" rx="6" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <rect x="20" y="135" width="100" height="20" rx="6" fill="#1f6feb" fill-opacity="0.2"/>
+  <text x="70" y="150" text-anchor="middle" fill="#58a6ff" font-size="10" font-weight="600">grill-me</text>
+  <text x="70" y="165" text-anchor="middle" fill="#8b949e" font-size="8">Interview</text>
+  <text x="70" y="173" text-anchor="middle" fill="#8b949e" font-size="8">user</text>
+
+  <!-- Arrow -->
+  <line x1="120" y1="157" x2="135" y2="157" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Box: spec-review -->
+  <rect x="135" y="135" width="90" height="44" rx="6" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <rect x="135" y="135" width="90" height="20" rx="6" fill="#1f6feb" fill-opacity="0.2"/>
+  <text x="180" y="150" text-anchor="middle" fill="#58a6ff" font-size="10" font-weight="600">spec-review</text>
+  <text x="180" y="165" text-anchor="middle" fill="#8b949e" font-size="8">Ambiguity</text>
+  <text x="180" y="173" text-anchor="middle" fill="#8b949e" font-size="8">check</text>
+
+  <!-- Arrow with gate label -->
+  <line x1="225" y1="157" x2="245" y2="157" stroke="#1f6feb" stroke-width="2"/>
+  <polygon points="245,157 238,153 238,161" fill="#1f6feb"/>
+  <text x="295" y="148" text-anchor="middle" fill="#1f6feb" font-size="8">APPROVE?</text>
+  <text x="295" y="172" text-anchor="middle" fill="#8b949e" font-size="7">spec-author</text>
+
+  <!-- Branch down from gate 1 -->
+  <line x1="295" y1="179" x2="295" y2="195" stroke="#1f6feb" stroke-width="1.5"/>
+  <line x1="295" y1="195" x2="245" y2="195" stroke="#1f6feb" stroke-width="1.5"/>
+  <line x1="245" y1="195" x2="245" y2="157" stroke="#1f6feb" stroke-width="1.5"/>
+  <text x="295" y="190" text-anchor="middle" fill="#1f6feb" font-size="7">No → iterate</text>
+
+  <!-- Box: implement -->
+  <rect x="245" y="135" width="130" height="44" rx="6" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <rect x="245" y="135" width="130" height="20" rx="6" fill="#238636" fill-opacity="0.2"/>
+  <text x="310" y="150" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">implement + tdd-loop</text>
+  <text x="310" y="165" text-anchor="middle" fill="#8b949e" font-size="8">Vertical slices</text>
+  <text x="310" y="173" text-anchor="middle" fill="#8b949e" font-size="8">RED→GREEN→REFACTOR</text>
+
+  <!-- Arrow -->
+  <line x1="375" y1="157" x2="395" y2="157" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="395,157 388,153 388,161" fill="#8b949e"/>
+
+  <!-- Box: reviewer -->
+  <rect x="395" y="135" width="110" height="44" rx="6" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <rect x="395" y="135" width="110" height="20" rx="6" fill="#a371f7" fill-opacity="0.2"/>
+  <text x="450" y="150" text-anchor="middle" fill="#bc8cff" font-size="10" font-weight="600">reviewer (judge)</text>
+  <text x="450" y="165" text-anchor="middle" fill="#8b949e" font-size="8">Spec</text>
+  <text x="450" y="173" text-anchor="middle" fill="#8b949e" font-size="8">compliance</text>
+
+  <!-- Arrow -->
+  <line x1="505" y1="157" x2="525" y2="157" stroke="#30363d" stroke-width="1.5"/>
+  <polygon points="525,157 518,153 518,161" fill="#8b949e"/>
+
+  <!-- Box: mutation-test -->
+  <rect x="525" y="135" width="120" height="44" rx="6" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <rect x="525" y="135" width="120" height="20" rx="6" fill="#f0883e" fill-opacity="0.2"/>
+  <text x="585" y="150" text-anchor="middle" fill="#f0883e" font-size="10" font-weight="600">mutation-test</text>
+  <text x="585" y="165" text-anchor="middle" fill="#8b949e" font-size="8">Kill mutants</text>
+  <text x="585" y="173" text-anchor="middle" fill="#8b949e" font-size="8">Score ≥ 70%</text>
+
+  <!-- Gate 2 arrow -->
+  <line x1="645" y1="157" x2="665" y2="157" stroke="#1f6feb" stroke-width="2"/>
+  <polygon points="665,157 658,153 658,161" fill="#1f6feb"/>
+  <text x="675" y="148" text-anchor="middle" fill="#1f6feb" font-size="8">APPROVE?</text>
+  <text x="675" y="172" text-anchor="middle" fill="#8b949e" font-size="7">/ship</text>
+
+  <!-- Branch from gate 2 -->
+  <line x1="675" y1="179" x2="675" y2="195" stroke="#1f6feb" stroke-width="1.5"/>
+  <line x1="675" y1="195" x2="585" y2="195" stroke="#1f6feb" stroke-width="1.5"/>
+  <line x1="585" y1="195" x2="585" y2="179" stroke="#1f6feb" stroke-width="1.5"/>
+  <text x="630" y="190" text-anchor="middle" fill="#1f6feb" font-size="7">No → iterate</text>
+
+  <!-- Box: ship (APPROVED) -->
+  <rect x="665" y="135" width="90" height="44" rx="6" fill="#21262d" stroke="#3fb950" stroke-width="1.5"/>
+  <rect x="665" y="135" width="90" height="20" rx="6" fill="#238636" fill-opacity="0.2"/>
+  <text x="710" y="150" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">ship</text>
+  <text x="710" y="165" text-anchor="middle" fill="#8b949e" font-size="8">Commit</text>
+  <text x="710" y="173" text-anchor="middle" fill="#8b949e" font-size="8">PR + Deploy</text>
+
+  <!-- Harness labels -->
+  <rect x="20" y="220" width="140" height="70" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="90" y="238" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Harness Engineering</text>
+  <text x="90" y="254" text-anchor="middle" fill="#8b949e" font-size="8">context-engineer</text>
+  <text x="90" y="264" text-anchor="middle" fill="#8b949e" font-size="8">subagent-driven-dev</text>
+  <text x="90" y="274" text-anchor="middle" fill="#8b949e" font-size="8">handoff</text>
+  <text x="90" y="284" text-anchor="middle" fill="#8b949e" font-size="8">diagnose + zoom-out</text>
+
+  <rect x="180" y="220" width="260" height="70" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="310" y="238" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Integrations</text>
+  <text x="310" y="254" text-anchor="middle" fill="#8b949e" font-size="8">graphify · superpowers · bmad-method</text>
+  <text x="310" y="264" text-anchor="middle" fill="#8b949e" font-size="8">karpathy-guidelines · context7</text>
+
+  <rect x="460" y="220" width="200" height="70" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="560" y="238" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Artifacts</text>
+  <text x="560" y="254" text-anchor="middle" fill="#8b949e" font-size="8">SPEC.md · HANDOFF.md · REVIEW.md</text>
+  <text x="560" y="264" text-anchor="middle" fill="#8b949e" font-size="8">MUTATION_REPORT.md · PRD.md</text>
+  <text x="560" y="274" text-anchor="middle" fill="#8b949e" font-size="8">EARS notation · Gherkin scenarios</text>
+
+  <rect x="680" y="220" width="200" height="70" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="780" y="238" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">2 Approval Gates Only</text>
+  <text x="780" y="254" text-anchor="middle" fill="#58a6ff" font-size="9">Gate 1: After spec — "Is this what I want?"</text>
+  <text x="780" y="266" text-anchor="middle" fill="#58a6ff" font-size="9">Gate 2: After mutation — "Does it work?"</text>
+  <text x="780" y="278" text-anchor="middle" fill="#3fb950" font-size="8">Everything else: automated by harness</text>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#8b949e"/>
+    </marker>
+  </defs>
+</svg>

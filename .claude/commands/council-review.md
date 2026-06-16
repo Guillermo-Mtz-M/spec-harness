@@ -1,0 +1,1 @@
+Multi-perspective anonymous review. Three specialist reviews (spec compliance, performance/edge cases, security/maintainability) anonymized and synthesized by a chairman into COUNCIL-REVIEW.md. Use for high-stakes features after /reviewer.

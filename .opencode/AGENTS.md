@@ -17,6 +17,7 @@
 | `/diagnose` | `skills/diagnose/SKILL.md` | Debug with scientific method |
 | `/zoom-out` | `skills/zoom-out/SKILL.md` | System-level view |
 | `/ship` | `skills/ship/SKILL.md` | Commit and deploy |
+| `/council-review` | `skills/council-review/SKILL.md` | Multi-perspective anonymous review |
 
 ## Agents
 
@@ -26,6 +27,7 @@
 | implementer | `agents/implementer.md` | Senior developer with TDD |
 | judge | `agents/judge.md` | Spec compliance reviewer |
 | mutation-tester | `agents/mutation-tester.md` | QA adversary |
+| council-chairman | `agents/council-chairman.md` | Anonymized review synthesis |
 
 ## Integration Skills
 

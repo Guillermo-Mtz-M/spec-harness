@@ -8,6 +8,10 @@ triggers: ["council review", "multi-review", "anonymous review", "council", "thr
 
 Multiple independent reviews from different perspectives, anonymized and synthesized by a chairman. Inspired by karpathy/llm-council's 3-stage deliberation: opinions → anonymous peer review → chairman synthesis.
 
+## Overview
+
+This is the karpathy/llm-council pattern: multiple independent reviews from different specialist perspectives, anonymized to prevent bias, and synthesized by a chairman into a single unified verdict. The key insight — anonymization removes anchoring bias and favoritism, producing more objective assessments than any single review.
+
 ## When to Use
 
 - After `/reviewer` gives APPROVED or REVISIONS NEEDED

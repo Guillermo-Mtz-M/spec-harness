@@ -5,6 +5,34 @@ All notable changes to Spec-Harness are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-06-15
+
+### Added
+
+#### Skills (1 new → 15 total)
+- **`/council-review`** — Multi-perspective anonymous review. Three specialist reviews (spec compliance, performance/edge cases, security/maintainability) anonymized and synthesized by a chairman into unified per-requirement verdicts. Inspired by karpathy/llm-council.
+
+#### Agent Personas (1 new → 5 total)
+- **`council-chairman.md`** — Synthesizes N anonymized reviews into COUNCIL-REVIEW.md. Per-requirement PASS/FAIL/PARTIAL with consensus strength and disagreement highlights. Graceful degradation if <3 reviews.
+
+#### Documentation
+- **README.zh.md** — Full Chinese (simplified) translation with technical terms kept in English
+- **Anonymization Principle** — Added to reviewer/SKILL.md to document anti-bias stance for council pipeline
+
+#### i18n
+- README.md is now pure English (no bilingual sections)
+- README.es.md updated with v1.2 badges and content
+- README.zh.md added for Chinese-speaking developers
+
+### Changed
+
+- **Skills count**: 14 → 15
+- **Agents count**: 4 → 5
+- **validate.js**: Added council-review skill and council-chairman agent to required artifacts
+- **.opencode/AGENTS.md**: Added council-review and council-chairman entries
+
+---
+
 ## [1.0.0] — 2026-06-15
 
 ### Added

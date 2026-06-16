@@ -86,6 +86,16 @@ For the test suite, check:
 **If REVISIONS NEEDED:** Return to `/implementer` with specific gaps.
 **If REJECTED:** Fundamental spec-code mismatch. Return to `/spec-author`.
 
+## Anonymization Principle
+
+When this review feeds into `/council-review`, reviewer identity must be stripped before synthesis. This prevents the chairman from anchoring on reviewer labels instead of evidence logic. The principle (from karpathy/llm-council):
+
+- **Identity concealment** — Reviews are presented as anonymous perspectives, not "Review A by [persona]"
+- **No favoritism** — The chairman evaluates logic, not who said it
+- **No anchoring** — Removing labels prevents biasing synthesis toward any single perspective
+
+This principle applies when reviews enter the council pipeline. For standalone `/reviewer` usage, it documents the anti-bias stance that underpins all review processes.
+
 ## Anti-Rationalization Table
 
 | Excuse | Rebuttal |

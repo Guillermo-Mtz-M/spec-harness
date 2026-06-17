@@ -103,7 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- [ ] GitHub Actions CI for running `validate.js` on PRs
+- [ ] `examples/` with a bug fix walkthrough
 - [ ] `examples/` with a bug fix walkthrough
 - [ ] Claude Code plugin manifest for marketplace install
 - [ ] Interactive `SPEC.md` template generator skill

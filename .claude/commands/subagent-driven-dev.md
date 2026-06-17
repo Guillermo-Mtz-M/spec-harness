@@ -1,0 +1,1 @@
+Dispatch fresh subagents per task via artifact handoffs. Each subagent gets only its SPEC.md slice and necessary context — no conversation history inheritance. Parallelize independent slices. Merge results via artifacts.

@@ -153,15 +153,18 @@ spec-harness/
 ├── skills/               # 15 skills (core workflow)
 ├── agents/               # 5 specialist personas
 ├── integrations/         # 5 external tool integrations
-├── templates/            # 5 artifact templates
+├── templates/            # 6 artifact templates
 │   ├── SPEC.md           # EARS/Gherkin contract
 │   ├── HANDOFF.md        # Session handoff
 │   ├── REVIEW.md         # Judge verdict
-│   └── MUTATION_REPORT.md # Mutation test results
+│   ├── MUTATION_REPORT.md # Mutation test results
+│   ├── COUNCIL-REVIEW.md # Council review synthesis
+│   └── PRD.md            # Product requirements
+│   ├── COUNCIL-REVIEW.md # Council review synthesis
 ├── references/           # 4 supplementary checklists
 ├── rules/                # Always-follow guidelines (common, ts, python)
 ├── docs/                 # Setup guides (Claude, OpenCode, Cursor, Gemini)
-├── .claude/commands/     # 9 slash commands for Claude Code
+├── .claude/commands/     # 16 slash commands for Claude Code
 └── scripts/              # install.js + validate.js
 ```
 

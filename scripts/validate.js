@@ -86,6 +86,7 @@ const REQUIRED = [
   'templates/REVIEW.md',
   'templates/MUTATION_REPORT.md',
   'templates/PRD.md',
+  'templates/COUNCIL-REVIEW.md',
   'references/ears-notation.md',
   'references/testing-anti-patterns.md',
   'references/context-minimization.md',

@@ -1,83 +1,120 @@
-# Ejemplo 02: API Rate Limiter
+# Example 02: API Rate Limiter Middleware
 
-Segundo ejemplo — esta vez un caso más simple: un rate limiter para una API REST.
+Second example — a simpler case: a rate limiter for a REST API.
 
-## El Escenario
+## The Scenario
 
-Se necesita proteger los endpoints de una API REST contra abuse (mismo cliente haciendo demasiadas requests). No es un feature completo — es un componente reutilizable.
+You need to protect REST API endpoints against abuse (same client making too many requests). Not a full feature — a reusable component.
 
-> Este ejemplo muestra cómo el flujo funciona para componentes, no solo features de usuario.
-
----
-
-## Paso 1: `/grill-me` (resumido)
-
-```
-A: "¿Qué protege este rate limiter?"
-U: "Endpoints de la API. Límite de 100 requests/minuto por API key."
-
-A: "¿Qué pasa cuando se excede?"
-U: "Devuelve 429 Too Many Requests con Retry-After header."
-
-A: "¿Necesitan granularidad diferente? ¿Por IP, por usuario, por API key?"
-U: "Por API key. Cada cliente tiene una key única."
-
-A: "¿Es por-request o por-segundo?"
-U: "Por minuto — sliding window de 1 minuto."
-
-A: "¿Cuál es el slice mínimo?"
-U: "Un middleware Express que usa una sliding window por API key, 100 req/min, devuelve 429 con Retry-After."
-```
+> This example shows how the flow works for components, not just user-facing features.
 
 ---
 
-## Paso 2: SPEC.md generado
+## Step 1: `/grill-me` (summarized)
 
-```markdown
-# SPEC — API Rate Limiter Middleware
-
-## REQ-001: Rate limit por API key
-When a request arrives with an API-Key header, the system shall count requests within a sliding window of 1 minute.
-If the count exceeds 100, the system shall return 429 with Retry-After header.
-
-## REQ-002: Requests sin API key
-If a request arrives without an API-Key header, the system shall allow the request (fail-open).
 ```
+A: "What does this rate limiter protect?"
+U: "API endpoints. Limit of 100 requests/minute per API key."
 
-> **Nota:** Este spec es más pequeño — solo 2 requisitos. El flujo completo de Review → TDD Loop → Judge → Mutation Test → Ship aplica igual. Un spec pequeño no significa menos rigor.
+A: "What happens when the limit is exceeded?"
+U: "Returns 429 Too Many Requests with Retry-After header."
+
+A: "Do you need different granularity? Per IP, per user, per API key?"
+U: "Per API key. Each client has a unique key."
+
+A: "Is it per-request or per-second?"
+U: "Per minute — sliding window of 1 minute."
+
+A: "What's the narrowest slice?"
+U: "An Express middleware that uses a sliding window per API key, 100 req/min, returns 429 with Retry-After."
+```
 
 ---
 
-## Insights de este Ejemplo
+## Step 2: SPEC.md generated
 
-### Lo que aprendimos
+See: [`SPEC.md`](SPEC.md)
 
-1. **Specs pequeñas son válidas** — 2 EARS requisitos para un middleware reutilizable. No necesitan ser features de usuario completas.
-2. **Fail-open vs fail-closed** — Para rate limiting, fail-open tiene sentido (no bloqueamos requests legítimos por problemas del limitador).
-3. **Sliding window** — Implementado con Redis o un Map en memoria. Para el ejemplo, usamos `Map` en memoria con cleanup automático.
+---
 
-### Diferencias con Ejemplo 01
+## Step 3: Spec Review
 
-| Aspecto | Ejemplo 01 (Auth) | Ejemplo 02 (Rate Limiter) |
+See: [`REVIEW.md`](REVIEW.md) (verdict on spec clarity and testability)
+
+---
+
+## Step 4: Implementation
+
+Vertical slices:
+
+```bash
+git log --oneline feature/rate-limit
+
+abc123 feat(middleware): REQ-001 sliding window rate limit per API key
+def456 feat(middleware): REQ-002 fail-open for requests without API key
+```
+
+---
+
+## Step 5: Judge Review
+
+See: [`REVIEW.md`](REVIEW.md) — verdict on whether code matches spec. In this case: APPROVED.
+
+---
+
+## Step 6: Mutation Testing
+
+See: [`MUTATION_REPORT.md`](MUTATION_REPORT.md)
+
+---
+
+## Step 7: Ship
+
+```bash
+git checkout main
+git merge feature/rate-limit --squash
+git commit -m "feat(middleware): API rate limiter with sliding window
+
+Implements:
+- Sliding window rate limit per API key (REQ-001)
+- Fail-open for requests without API key (REQ-002)
+- Tests: 8 passing, mutation score 81%
+
+Human gates: SPEC approved, RESULT approved"
+```
+
+---
+
+## Insights from This Example
+
+### What We Learned
+
+1. **Small specs are valid** — 2 EARS requirements for a reusable middleware. They don't need to be complete user features.
+2. **Fail-open vs fail-closed** — For rate limiting, fail-open makes sense (don't block legitimate requests due to limiter issues).
+3. **Sliding window** — Implemented with Redis or an in-memory Map. For the example, we use in-memory `Map` with automatic cleanup.
+
+### Differences from Example 01
+
+| Aspect | Example 01 (Auth) | Example 02 (Rate Limiter) |
 |---------|-------------------|---------------------------|
-| Spec size | 4 requisitos | 2 requisitos |
-| Grilling sessions | 1 larga | 1 corta |
-| Team involved | Humano revisando | Humano revisando |
-| Deployment scope | Feature completo | Componente reutilizable |
-| Time to implement | ~4 horas | ~1 hora |
+| Spec size | 4 requirements | 2 requirements |
+| Grilling sessions | 1 long | 1 short |
+| Team involved | Human reviewing | Human reviewing |
+| Deployment scope | Complete feature | Reusable component |
+| Time to implement | ~4 hours | ~1 hour |
 
-### El punto clave
+### The Key Point
 
-**El flujo Spec-Harness escala.** No importa si es un sistema de auth de 50 requisitos o un middleware de 2 — el proceso es el mismo: entrevistar, especificar, grill-me, implementar con TDD, judge review, mutation test, ship.
+**The Spec-Harness flow scales.** Whether it's a 50-requirement auth system or a 2-requirement middleware — the process is the same: interview, specify, grill, implement with TDD, judge review, mutation test, ship.
 
 ---
 
-## Archivos del Ejemplo 02
+## Example Files
 
 ```
 examples/02-api-rate-limit/
-├── SPEC.md              ← EARS/Gherkin del rate limiter
-└── README.md            ← Este archivo
+├── SPEC.md              ← EARS/Gherkin for the rate limiter
+├── REVIEW.md            ← Judge review verdict
+├── MUTATION_REPORT.md   ← Mutation testing results
+└── README.md            ← This file
 ```
-
-(El código y artefactos completos están en `examples/02-api-rate-limit/` — contribución bienvenida para completar este ejemplo.)

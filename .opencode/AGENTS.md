@@ -10,7 +10,8 @@
 | `/implement` | `skills/implementer/SKILL.md` | Build with TDD |
 | `/tdd-loop` | `skills/tdd-loop/SKILL.md` | Red-Green-Refactor cycle |
 | `/reviewer` | `skills/reviewer/SKILL.md` | Spec compliance review |
-| `/mutation-test` | `skills/mutation-tester/SKILL.md` | Adversarial mutation testing |
+| `/council-review` | `skills/council-review/SKILL.md` | Multi-perspective anonymous review |
+| `/mutation-tester` | `skills/mutation-tester/SKILL.md` | Adversarial mutation testing |
 | `/context-engineer` | `skills/context-engineer/SKILL.md` | Manage context budget |
 | `/subagent-driven-dev` | `skills/subagent-driven-dev/SKILL.md` | Multi-agent orchestration |
 | `/handoff` | `skills/handoff/SKILL.md` | Session handoff |
@@ -18,6 +19,7 @@
 | `/zoom-out` | `skills/zoom-out/SKILL.md` | System-level view |
 | `/ship` | `skills/ship/SKILL.md` | Commit and deploy |
 | `/council-review` | `skills/council-review/SKILL.md` | Multi-perspective anonymous review |
+| `/using-spec-harness` | `skills/using-spec-harness/SKILL.md` | Map task to right skill |
 
 ## Agents
 

@@ -1,0 +1,1 @@
+See the code in system context. Evaluate module depth (Ousterhout's philosophy). Identify deepening opportunities — modules where adding complexity inside reduces complexity outside. Find overlooked design issues and cross-cutting concerns.

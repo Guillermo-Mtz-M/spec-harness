@@ -1,0 +1,1 @@
+Adversarial mutation testing. Inject arithmetic, logical, conditional, return, deletion, and variable-swap mutations into the codebase. Kill mutants by proving tests catch them. Require >= 70% mutation score. Fix weak tests, document equivalent mutants.

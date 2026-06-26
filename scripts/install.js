@@ -12,6 +12,9 @@
 const fs = require('fs');
 const path = require('path');
 
+const STATE_DIR = path.join(process.env.HOME || process.env.USERPROFILE, '.spec-harness');
+const STATE_FILE = path.join(STATE_DIR, 'state.json');
+
 const TARGETS = {
   claude: {
     name: 'Claude Code',
@@ -109,6 +112,8 @@ function installSkills(srcSkills, destSkills) {
   }
 }
 
+let installedTargets = [];
+
 function install(target, withExtras) {
   const dirs = TARGETS[target];
   if (!dirs) {
@@ -185,6 +190,20 @@ function install(target, withExtras) {
   console.log(`  1. Restart your agent or run /using-spec-harness`);
   console.log(`  2. Start with /grill-me for a new feature`);
   console.log(`  3. Read README.md for the full workflow`);
+
+  installedTargets.push(target);
+}
+
+function saveState(withExtras) {
+  const version = '1.0.0';
+  const state = {
+    version,
+    targets: [...new Set(installedTargets)],
+    extras: withExtras,
+    installedAt: new Date().toISOString(),
+  };
+  fs.mkdirSync(STATE_DIR, { recursive: true });
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 }
 
 function autoDetect() {
@@ -220,8 +239,10 @@ if (isAuto) {
       install(target, withExtras);
     }
   }
+  saveState(withExtras);
 } else if (explicitTarget) {
   install(explicitTarget, withExtras);
+  saveState(withExtras);
 } else {
   console.log('Usage: node scripts/install.js [--target <agent>] [--with-extras] [--auto]');
   console.log('');

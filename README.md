@@ -167,7 +167,6 @@ spec-harness/
 │   ├── MUTATION_REPORT.md # Mutation test results
 │   ├── COUNCIL-REVIEW.md # Council review synthesis
 │   └── PRD.md            # Product requirements
-│   ├── COUNCIL-REVIEW.md # Council review synthesis
 ├── references/           # 4 supplementary checklists
 ├── rules/                # Always-follow guidelines (common, ts, python)
 ├── docs/                 # Setup guides (Claude, OpenCode, Cursor, Gemini)

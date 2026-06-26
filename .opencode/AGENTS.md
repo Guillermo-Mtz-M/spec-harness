@@ -11,14 +11,13 @@
 | `/tdd-loop` | `skills/tdd-loop/SKILL.md` | Red-Green-Refactor cycle |
 | `/reviewer` | `skills/reviewer/SKILL.md` | Spec compliance review |
 | `/council-review` | `skills/council-review/SKILL.md` | Multi-perspective anonymous review |
-| `/mutation-tester` | `skills/mutation-tester/SKILL.md` | Adversarial mutation testing |
+| `/mutation-test` | `skills/mutation-tester/SKILL.md` | Adversarial mutation testing |
 | `/context-engineer` | `skills/context-engineer/SKILL.md` | Manage context budget |
 | `/subagent-driven-dev` | `skills/subagent-driven-dev/SKILL.md` | Multi-agent orchestration |
 | `/handoff` | `skills/handoff/SKILL.md` | Session handoff |
 | `/diagnose` | `skills/diagnose/SKILL.md` | Debug with scientific method |
 | `/zoom-out` | `skills/zoom-out/SKILL.md` | System-level view |
 | `/ship` | `skills/ship/SKILL.md` | Commit and deploy |
-| `/council-review` | `skills/council-review/SKILL.md` | Multi-perspective anonymous review |
 | `/using-spec-harness` | `skills/using-spec-harness/SKILL.md` | Map task to right skill |
 
 ## Agents
@@ -31,7 +30,7 @@
 | mutation-tester | `agents/mutation-tester.md` | QA adversary |
 | council-chairman | `agents/council-chairman.md` | Anonymized review synthesis |
 
-## Integration Skills
+## Core Integrations
 
 | Integration | Path | Use When |
 |-------------|------|----------|
@@ -41,12 +40,21 @@
 | karpathy-guidelines | `integrations/karpathy-guidelines/SKILL.md` | Simplicity-first coding |
 | context7 | `integrations/context7/SKILL.md` | Up-to-date library docs |
 
+## Extras Integrations (install with --with-extras)
+
+| Integration | Path | Use When |
+|-------------|------|----------|
+| ui-ux-pro-max | `integrations/ui-ux-pro-max/SKILL.md` | Professional UI/UX design system generation |
+| open-design | `integrations/open-design/SKILL.md` | Brand-grade design contracts + multi-format output |
+| ian-xiaohei-illustrations | `integrations/ian-xiaohei-illustrations/SKILL.md` | Chinese article illustrations (Xiaohei style) |
+| small-business | `integrations/small-business/SKILL.md` | Business ops: payroll, cash flow, CRM |
+
 ## Loading
 
 Reference this file from your OpenCode `AGENTS.md`:
 
 ```markdown
-Include: /path/to/WORKFLOW/.opencode/AGENTS.md
+Include: /path/to/spec-harness/.opencode/AGENTS.md
 ```
 
 Or use the Skill tool directly:

@@ -52,6 +52,14 @@ node scripts/validate.js
 
 This checks that all skills have the required sections and all references resolve.
 
+## Research
+
+See the [`research/`](./research/README.md) directory for the full analysis of 13 core repos, 4 extras, and 9 technical videos that influenced the design.
+
+## Extras
+
+Optional integrations (`--with-extras`) add design system generation, brand-grade design contracts, Chinese illustrations, and business operations plugins. See the [Integrations section](./README.md#integrations-9) for details.
+
 ## Commit Messages
 
 Follow conventional commits:

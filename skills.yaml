@@ -1,0 +1,15 @@
+name: spec-harness
+description: >
+  Spec-Driven Development + Harness Engineering for AI coding agents.
+  15 skills covering the full workflow: grill-me → spec-author → spec-review →
+  implement → tdd-loop → reviewer → council-review → mutation-test → ship.
+  Plus context-engineer, subagent-driven-dev, handoff, diagnose, zoom-out,
+  and using-spec-harness.
+license: MIT
+metadata:
+  author: Guillermo-Mtz-M
+  repository: guillermo-mtz-m/spec-harness
+  category: development-workflow
+  skills: "15"
+  agents: "5"
+  integrations: "9"

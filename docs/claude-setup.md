@@ -42,6 +42,7 @@ This copies:
 | `/diagnose` | Debug with scientific method |
 | `/zoom-out` | System-level view |
 | `/ship` | Commit, PR, changelog, deploy |
+| `/spec-harness-update` | Check and apply spec-harness updates |
 | `/using-spec-harness` | Map task to right skill |
 
 ## Skills Available

@@ -51,7 +51,7 @@ npx skills add guillermo-mtz-m/spec-harness
 git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness && node scripts/install.js --target claude
 ```
 
-> **Extras**: Add `--with-extras` to install ui-ux-pro-max (96.8k⭐), open-design (71.6k⭐), Xiaohei illustrations, and small-business plugins.
+> **Extras**: Add `--with-extras` to `install.js` for ui-ux-pro-max (96.8k⭐), open-design (71.6k⭐), Xiaohei illustrations, and small-business plugins. `npx skills add` installs all skills by default.
 
 ### Then Use
 
@@ -88,11 +88,12 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 # Via skills.sh (all agents)
 npx skills update
 
-# Via git (offline/CI)
-cd spec-harness && git pull && node scripts/install.js --target claude [--with-extras]
+# Via git (offline/CI) — reinstall to same targets as last install
+cd spec-harness && git pull && node scripts/update.js
 
 # Check for updates without installing
 npx skills check
+node scripts/update.js --check   # also works
 ```
 
 ---
@@ -198,7 +199,7 @@ spec-harness/
 ├── rules/                # Always-follow guidelines (common, ts, python)
 ├── docs/                 # Setup guides (Claude, OpenCode, Cursor, Gemini)
 ├── .claude/commands/     # 15 slash commands for Claude Code
-└── scripts/              # install.js + validate.js + update.js
+└── scripts/              # install.js + validate.js + update.js + mcp-config.js
 ```
 
 ---

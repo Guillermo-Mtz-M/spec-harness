@@ -1,1 +1,1 @@
-Save the current session into a compact HANDOFF.md document. Capture decisions (with why), completed work (with evidence), remaining work (with starting points), and key context. The next agent reads this instead of conversation history.
+Load and execute the handoff skill from skills/handoff/SKILL.md. Save session state to HANDOFF.md for agent switches.

@@ -1,1 +1,1 @@
-Relentlessly interview the user about what they want before any code is written. One question at a time, challenge premises, explore design alternatives, define the narrowest useful slice. Save output for /spec-author.
+Load and execute the grill-me skill from skills/grill-me/SKILL.md. Relentlessly interview the user about what they want before any code is written.

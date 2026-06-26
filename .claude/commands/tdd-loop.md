@@ -1,1 +1,1 @@
-RED-GREEN-REFACTOR cycle with verification gates. Write a failing test first, then minimal code to pass, then refactor only if tests stay green. No forward progress without a passing test. Run after each vertical slice from /implement.
+Load and execute the tdd-loop skill from skills/tdd-loop/SKILL.md. RED-GREEN-REFACTOR cycle with verification gates.

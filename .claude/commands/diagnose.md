@@ -1,1 +1,1 @@
-Systematic debug: reproduce the bug, minimize the reproducer, hypothesize the root cause, fix, and write a guard test that would catch it if it reoccurs. No fixing without a hypothesis. No closing without a guard test.
+Load and execute the diagnose skill from skills/diagnose/SKILL.md. Systematic debugging: reproduce, minimize, hypothesize, fix.

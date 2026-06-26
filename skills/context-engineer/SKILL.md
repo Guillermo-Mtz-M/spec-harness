@@ -1,9 +1,11 @@
 ---
 name: context-engineer
-description: Manage context like a budget — minimal context per agent, progressive loading, external memory. Use at session start and when quality drops.
-triggers: ["context engineer", "optimize context", "too much context", "context bloat", "manage tokens"]
+description: Minimize token usage, progressive context loading, external memory. Use at session start or context bloat.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["context", "tokens", "manage memory", "reduce context"]
 ---
-
 # Context Engineer
 
 Context is a budget. Spend it wisely. Each agent gets only the context it needs, loaded progressively, with external memory for persistence across sessions.
@@ -28,16 +30,16 @@ Based on the Harness Engineering principle: **tools simples > hiperespecializado
 Ask: "What does the agent actually need to know RIGHT NOW?"
 
 Classify existing context:
-- **Essential** — must be in context for this task
-- **Background** — useful but not critical (load on demand)
-- **Noise** — conversation history that's no longer relevant
+- **Essential** â€” must be in context for this task
+- **Background** â€” useful but not critical (load on demand)
+- **Noise** â€” conversation history that's no longer relevant
 
 ### Step 2: Minimize Active Context
 
-1. **Move background to files** — if it's in the conversation but not needed now, save it to a file and reference it
-2. **Use CONTEXT.md** — shared terminology that replaces long explanations
-3. **Progressive disclosure** — load reference material only when a skill triggers it, not upfront
-4. **External memory** — use `HANDOFF.md` or `graphify` knowledge graph for cross-session persistence
+1. **Move background to files** â€” if it's in the conversation but not needed now, save it to a file and reference it
+2. **Use CONTEXT.md** â€” shared terminology that replaces long explanations
+3. **Progressive disclosure** â€” load reference material only when a skill triggers it, not upfront
+4. **External memory** â€” use `HANDOFF.md` or `graphify` knowledge graph for cross-session persistence
 
 ### Step 3: Structure the Context Stack
 
@@ -60,7 +62,7 @@ When context exceeds ~60% of the budget:
 When delegating to a subagent, give it:
 - Its input artifact (SPEC.md for reviewer, code for mutation-tester)
 - Its instructions (the skill prompt)
-- Nothing else — no conversation history, no other agents' context
+- Nothing else â€” no conversation history, no other agents' context
 
 ## Anti-Rationalization Table
 
@@ -73,7 +75,7 @@ When delegating to a subagent, give it:
 
 ## Verification
 
-- [ ] Context stack has ≤4 layers defined
+- [ ] Context stack has â‰¤4 layers defined
 - [ ] Layer 0 is <2KB
 - [ ] No background info is loaded upfront
 - [ ] Subagents receive only their input artifact + skill prompt

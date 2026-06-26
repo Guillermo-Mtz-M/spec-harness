@@ -1,8 +1,11 @@
 # OpenCode Setup
 
-## Install
+## Install (Recommended)
 
 ```bash
+# Via skills.sh (auto-detects OpenCode)
+npx skills add guillermo-mtz-m/spec-harness
+
 # Option A: Reference in your AGENTS.md
 Include: /path/to/spec-harness/.opencode/AGENTS.md
 
@@ -54,3 +57,13 @@ Core: graphify, superpowers, bmad-method, karpathy-guidelines, context7
 Extras (`--with-extras`): ui-ux-pro-max, open-design, ian-xiaohei-illustrations, small-business
 
 See `.opencode/AGENTS.md` for the full integration table.
+
+## Updating
+
+```bash
+# Via skills.sh (recommended)
+npx skills update
+
+# Via git
+cd spec-harness && git pull && node scripts/install.js --target opencode [--with-extras]
+```

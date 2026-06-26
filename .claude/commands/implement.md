@@ -1,1 +1,1 @@
-Implement the approved SPEC.md one vertical slice at a time using TDD. Each slice: write failing test → implement minimal code → refactor → commit. No code without a corresponding spec requirement. Hand off to /reviewer when all slices complete.
+Load and execute the implementer skill from skills/implementer/SKILL.md. Build thin vertical slices from approved spec.

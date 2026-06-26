@@ -1,9 +1,11 @@
 ---
 name: using-spec-harness
-description: Maps your task to the right skill workflow. Use at session start to find your path through the system.
-triggers: ["using spec harness", "which skill", "how do I start", "help me use this"]
+description: Maps the user's task to the right spec-harness skill. Use at session start or when the user asks what to do.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["help", "how to", "what next", "guide me"]
 ---
-
 # Using Spec-Harness
 
 You just installed Spec-Harness. Now what? This skill maps your task to the right workflow.
@@ -36,7 +38,7 @@ Spec-Harness is a system of composable skills. Not every task needs every skill.
 The canonical flow is:
 
 ```
-/grill-me → /spec-author → [HUMAN APPROVES SPEC] → /implement → /reviewer → /mutation-tester → [HUMAN APPROVES RESULT] → /ship
+/grill-me â†’ /spec-author â†’ [HUMAN APPROVES SPEC] â†’ /implement â†’ /reviewer â†’ /mutation-tester â†’ [HUMAN APPROVES RESULT] â†’ /ship
 ```
 
 But you can enter at any point if you have the prerequisites:
@@ -48,9 +50,9 @@ But you can enter at any point if you have the prerequisites:
 
 ### Step 3: Know the Two Gates
 
-**Human Approval Gate #1** — After `/spec-author`. The human decides: "Is this what I want?"
+**Human Approval Gate #1** â€” After `/spec-author`. The human decides: "Is this what I want?"
 
-**Human Approval Gate #2** — After `/mutation-tester`. The human decides: "Does this work?"
+**Human Approval Gate #2** â€” After `/mutation-tester`. The human decides: "Does this work?"
 
 Between the gates, the harness runs autonomously. That's the point.
 
@@ -58,11 +60,11 @@ Between the gates, the harness runs autonomously. That's the point.
 
 The 5 integrations (graphify, superpowers, bmad-method, karpathy-guidelines, context7) are pre-wired but optional. Use them when their specific capability is needed:
 
-- `graphify` — when you need a structural understanding of a codebase
-- `superpowers` — when you want the full subagent-driven brainstorm→plan→execute pipeline
-- `bmad-method` — when you want scale-adaptive planning with 12+ specialized agents
-- `karpathy-guidelines` — when you want simplicity-first coding principles always loaded
-- `context7` — when you need up-to-date documentation for any library
+- `graphify` â€” when you need a structural understanding of a codebase
+- `superpowers` â€” when you want the full subagent-driven brainstormâ†’planâ†’execute pipeline
+- `bmad-method` â€” when you want scale-adaptive planning with 12+ specialized agents
+- `karpathy-guidelines` â€” when you want simplicity-first coding principles always loaded
+- `context7` â€” when you need up-to-date documentation for any library
 
 ## When to Use
 
@@ -73,15 +75,15 @@ The 5 integrations (graphify, superpowers, bmad-method, karpathy-guidelines, con
 ## Quick Decision Tree
 
 ```
-"Build something" → Is there a SPEC.md?
-  ├── No → /grill-me → /spec-author
-  └── Yes → Is it approved?
-       ├── No → /spec-review → [human approves]
-       └── Yes → /implement → /reviewer → /mutation-tester → [human approves] → /ship
-"Fix something" → /diagnose
-"Understand something" → /zoom-out or /graphify
-"Need docs for [library]" → /context7
-"Save my progress" → /handoff
+"Build something" â†’ Is there a SPEC.md?
+  â”œâ”€â”€ No â†’ /grill-me â†’ /spec-author
+  â””â”€â”€ Yes â†’ Is it approved?
+       â”œâ”€â”€ No â†’ /spec-review â†’ [human approves]
+       â””â”€â”€ Yes â†’ /implement â†’ /reviewer â†’ /mutation-tester â†’ [human approves] â†’ /ship
+"Fix something" â†’ /diagnose
+"Understand something" â†’ /zoom-out or /graphify
+"Need docs for [library]" â†’ /context7
+"Save my progress" â†’ /handoff
 ```
 
 ## Anti-Rationalization Table

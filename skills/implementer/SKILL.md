@@ -1,9 +1,11 @@
 ---
 name: implementer
-description: Incremental implementation via thin vertical slices with TDD. Use after spec is approved.
-triggers: ["implement", "build this", "code it", "start implementing"]
+description: Build thin vertical slices with TDD from an approved spec. Use after the spec is approved.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["implement", "build", "start coding", "code from spec"]
 ---
-
 # Implementer
 
 Build the spec one vertical slice at a time. Every slice goes through the TDD loop. Every slice produces a commit. No forward progress without passing tests.
@@ -20,8 +22,8 @@ Implementation is decomposed into independently verifiable vertical slices. Each
 
 ## Input Artifacts
 
-- `SPEC.md` — the approved requirements
-- `CONTEXT.md` — project terminology (if exists)
+- `SPEC.md` â€” the approved requirements
+- `CONTEXT.md` â€” project terminology (if exists)
 - Existing codebase
 
 ## Output Artifacts
@@ -36,10 +38,10 @@ Implementation is decomposed into independently verifiable vertical slices. Each
 Read `SPEC.md` and break requirements into independently implementable slices:
 
 ```
-Slice 1: [REQ-001, REQ-002] — Core data model + basic CRUD
-Slice 2: [REQ-003] — Validation layer
-Slice 3: [REQ-004, REQ-005] — Error handling + edge cases
-Slice 4: [REQ-006] — Integration with external service
+Slice 1: [REQ-001, REQ-002] â€” Core data model + basic CRUD
+Slice 2: [REQ-003] â€” Validation layer
+Slice 3: [REQ-004, REQ-005] â€” Error handling + edge cases
+Slice 4: [REQ-006] â€” Integration with external service
 ```
 
 Rules:

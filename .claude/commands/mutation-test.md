@@ -1,1 +1,1 @@
-Run mutation testing on the implementation. Inject faults (arithmetic, logical, conditional, return, deletion mutations). Kill the mutants or fix the tests. Target mutation score >= 70%. Produce MUTATION_REPORT.md. After pass, ask human for Approval Gate #2.
+Load and execute the mutation-tester skill from skills/mutation-tester/SKILL.md. Adversarial mutation testing requiring >=70% score.

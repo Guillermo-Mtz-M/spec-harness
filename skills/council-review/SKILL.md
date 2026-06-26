@@ -1,16 +1,18 @@
 ---
 name: council-review
-description: Multi-perspective anonymous review. Three specialist reviews (spec compliance, performance/edge cases, security/maintainability) synthesized by a chairman into a unified verdict.
-triggers: ["council review", "multi-review", "anonymous review", "council", "three reviews"]
+description: Multi-perspective anonymous review with specialist perspectives synthesized by a chairman.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["council review", "multi-review", "anonymous review", "three reviews"]
 ---
-
 # Council Review
 
-Multiple independent reviews from different perspectives, anonymized and synthesized by a chairman. Inspired by karpathy/llm-council's 3-stage deliberation: opinions → anonymous peer review → chairman synthesis.
+Multiple independent reviews from different perspectives, anonymized and synthesized by a chairman. Inspired by karpathy/llm-council's 3-stage deliberation: opinions â†’ anonymous peer review â†’ chairman synthesis.
 
 ## Overview
 
-This is the karpathy/llm-council pattern: multiple independent reviews from different specialist perspectives, anonymized to prevent bias, and synthesized by a chairman into a single unified verdict. The key insight — anonymization removes anchoring bias and favoritism, producing more objective assessments than any single review.
+This is the karpathy/llm-council pattern: multiple independent reviews from different specialist perspectives, anonymized to prevent bias, and synthesized by a chairman into a single unified verdict. The key insight â€” anonymization removes anchoring bias and favoritism, producing more objective assessments than any single review.
 
 ## When to Use
 
@@ -25,9 +27,9 @@ This is the karpathy/llm-council pattern: multiple independent reviews from diff
 
 ## Input Artifacts
 
-- `SPEC.md` — the approved requirements
+- `SPEC.md` â€” the approved requirements
 - Implementation code (files changed since spec approval)
-- `REVIEW.md` — the single-perspective review (if exists)
+- `REVIEW.md` â€” the single-perspective review (if exists)
 - Test suite output
 
 ## Output Artifact
@@ -66,7 +68,7 @@ The council-chairman agent receives the 3 anonymized reviews and produces a unif
 
 **Council Verdict: PASS | FAIL | PARTIAL**
 
-**Consensus:** [2/3 PASS, 1/3 PARTIAL — explanation]
+**Consensus:** [2/3 PASS, 1/3 PARTIAL â€” explanation]
 
 **Key Disagreements:** [none | description of where reviews diverged]
 
@@ -84,7 +86,7 @@ If fewer than 3 reviews are available (e.g., context window limits):
 | Excuse | Rebuttal |
 |--------|----------|
 | "One review is enough" | A single perspective has blind spots. That's why code review is a team sport. |
-| "The reviews all say PASS" | Consensus is valuable — it means multiple independent eyes agree. |
+| "The reviews all say PASS" | Consensus is valuable â€” it means multiple independent eyes agree. |
 | "This is overkill for a small change" | Then use `/reviewer` alone. Council review is for high-stakes features. |
 | "The chairman might be biased" | Anonymization removes identity anchoring. The chairman sees logic, not labels. |
 

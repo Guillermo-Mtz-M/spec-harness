@@ -1,1 +1,1 @@
-Minimize context usage with 4-layer stack: compact at 60% usage, progressive loading, external memory. Load only what each subagent needs. Swap conversation for artifacts. Use at session start or when context is bloated.
+Load and execute the context-engineer skill from skills/context-engineer/SKILL.md. Minimize token usage and manage context budget.

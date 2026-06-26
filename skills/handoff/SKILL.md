@@ -1,12 +1,14 @@
 ---
 name: handoff
-description: Compact session into handoff document so another agent can continue the work. Use when switching agents or context is bloated.
-triggers: ["handoff", "save progress", "context save", "switch agent"]
+description: Save compact session state to HANDOFF.md for agent switches. Use when switching agents or resetting context.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["handoff", "save progress", "switch agent", "save state"]
 ---
-
 # Handoff
 
-Compress the current session into a compact, self-contained document. The next agent picks up from the handoff — not from the conversation history.
+Compress the current session into a compact, self-contained document. The next agent picks up from the handoff â€” not from the conversation history.
 
 ## Overview
 
@@ -17,7 +19,7 @@ Session-to-session continuity in AI agents is solved by artifacts, not by contex
 - Before starting a fresh session (context bloat)
 - Before delegating to a subagent
 - At the end of a work session (save progress)
-- Before switching between agents (Claude → Codex → OpenCode)
+- Before switching between agents (Claude â†’ Codex â†’ OpenCode)
 
 ## Input
 
@@ -28,7 +30,7 @@ Session-to-session continuity in AI agents is solved by artifacts, not by contex
 
 ## Output
 
-- `HANDOFF.md` — compact session context for next agent
+- `HANDOFF.md` â€” compact session context for next agent
 
 ## Process
 
@@ -38,7 +40,7 @@ What decisions were made and why:
 
 ```markdown
 ## Decisions
-- [Decision]: [Why] — [Alternatives considered]
+- [Decision]: [Why] â€” [Alternatives considered]
 - Chose X over Y because Z
 ```
 
@@ -48,8 +50,8 @@ What was completed:
 
 ```markdown
 ## Completed
-- [Task]: [Result] — [Verifying evidence]
-- Slice 1: Data model + CRUD — 4 tests passing, committed as abc123
+- [Task]: [Result] â€” [Verifying evidence]
+- Slice 1: Data model + CRUD â€” 4 tests passing, committed as abc123
 ```
 
 ### Step 3: Capture Remaining Work
@@ -58,7 +60,7 @@ What's left, with enough context for a fresh agent:
 
 ```markdown
 ## Remaining
-- Slice 2: Validation layer — start with REQ-003 in SPEC.md
+- Slice 2: Validation layer â€” start with REQ-003 in SPEC.md
 - The `validate()` function should be added to `src/model.ts`
 - Follow /tdd-loop pattern
 ```

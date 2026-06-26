@@ -1,9 +1,11 @@
 ---
 name: zoom-out
-description: See the code in the context of the whole system. Find design opportunities and deepening possibilities.
-triggers: ["zoom out", "big picture", "system view", "architecture", "deeper modules"]
+description: See implementation in system context. Use when lost in details or needing architectural perspective.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["zoom out", "architecture", "system view", "big picture"]
 ---
-
 # Zoom Out
 
 When you're lost in the details, zoom out. Explain the code in the context of the whole system. Find where modules can be deepened. Spot design drift before it becomes a ball of mud.
@@ -12,7 +14,7 @@ When you're lost in the details, zoom out. Explain the code in the context of th
 
 Agents optimize locally. They focus on the file they're editing and miss system-level patterns. This skill forces the agent to step back and see the code as a system.
 
-Based on John Ousterhout's "A Philosophy of Software Design": the best modules are deep — they expose simple interfaces over complex implementations.
+Based on John Ousterhout's "A Philosophy of Software Design": the best modules are deep â€” they expose simple interfaces over complex implementations.
 
 ## When to Use
 
@@ -30,8 +32,8 @@ What files were touched? What's the blast radius of the change?
 ### Step 2: Evaluate Module Depth
 
 For each module touched:
-- **Deep module** — simple interface, complex internals (good)
-- **Shallow module** — complex interface, trivial internals (bad)
+- **Deep module** â€” simple interface, complex internals (good)
+- **Shallow module** â€” complex interface, trivial internals (bad)
 
 If modules are getting shallower, it's time to refactor.
 
@@ -53,7 +55,7 @@ Read `CONTEXT.md` (if it exists) for the shared language. Then check:
 - Design impact: [none/minor/significant]
 
 ### Module Depth
-- [module]: [deep/shallow] — [recommended action if shallow]
+- [module]: [deep/shallow] â€” [recommended action if shallow]
 
 ### Opportunities
 - [deepening opportunity]: [what to consolidate, what to extract]

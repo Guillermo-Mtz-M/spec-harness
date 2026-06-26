@@ -1,1 +1,1 @@
-Fresh-context review of implementation against SPEC.md. Judge the code against the spec, not style preferences. Give PASS/FAIL/PARTIAL per requirement. Overall verdict: APPROVED, REVISIONS NEEDED, or REJECTED. Produce REVIEW.md.
+Load and execute the reviewer skill from skills/reviewer/SKILL.md. Fresh-context judge reviews code against spec.

@@ -2,36 +2,75 @@
 
 /**
  * spec-harness installer
- * Copies skills, agents, rules, and integrations to the target agent's config directory.
- * Usage: node scripts/install.js [target] [--with-extras]
- *   target: claude (default), opencode, cursor
- *   --with-extras: also install extras integrations (ui-ux-pro-max, open-design, etc.)
+ * Primary: npx skills add guillermo-mtz-m/spec-harness (recommended)
+ * Fallback: node scripts/install.js [--target <agent>] [--with-extras] [--auto]
+ *
+ * Targets: claude, opencode, cursor, codex, gemini, antigravity, windsurf, copilot
+ * Auto-detect: analyzes environment to find which agents are installed
  */
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+
+const STATE_DIR = path.join(process.env.HOME || process.env.USERPROFILE, '.spec-harness');
+const STATE_FILE = path.join(STATE_DIR, 'state.json');
 
 const TARGETS = {
   claude: {
+    name: 'Claude Code',
     skills: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/skills'),
-    agents: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/agents'),
     commands: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/commands'),
     rules: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/rules'),
-    integrations: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/skills/integrations'),
+    agents: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/agents'),
     templates: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/templates'),
     references: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/references'),
-    docs: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/docs'),
+    integrations: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/skills/integrations'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.claude')),
   },
   opencode: {
-    agents: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/agents'),
+    name: 'OpenCode',
     skills: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/skills'),
+    agents: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/agents'),
     integrations: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/skills/integrations'),
     templates: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/templates'),
     references: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/references'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.opencode')),
   },
   cursor: {
+    name: 'Cursor',
     rules: path.join(process.env.HOME || process.env.USERPROFILE, '.cursor/rules'),
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.cursor/skills'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.cursor')),
+  },
+  codex: {
+    name: 'Codex CLI',
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.agents/skills'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.codex')),
+  },
+  gemini: {
+    name: 'Gemini CLI',
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.gemini/skills'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.gemini')),
+  },
+  antigravity: {
+    name: 'Antigravity IDE/CLI',
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.gemini/config/skills'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.gemini/antigravity')),
+  },
+  windsurf: {
+    name: 'Windsurf / Devin',
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.codeium/windsurf/skills'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.codeium/windsurf')),
+  },
+  copilot: {
+    name: 'GitHub Copilot',
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.copilot/skills'),
+    detect: () => fs.existsSync(path.join(process.env.HOME || process.env.USERPROFILE, '.copilot')),
+  },
+  universal: {
+    name: 'Universal (.agents/skills/)',
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.agents/skills'),
+    detect: () => true,
   },
 };
 
@@ -41,6 +80,8 @@ const EXTRAS_INTEGRATIONS = [
   'ian-xiaohei-illustrations',
   'small-business',
 ];
+
+const UNIVERSAL_SKILL_TARGETS = ['codex', 'cursor', 'windsurf'];
 
 function copyRecursive(src, dest) {
   if (!fs.existsSync(src)) return;
@@ -57,6 +98,22 @@ function copyRecursive(src, dest) {
   }
 }
 
+function installSkills(srcSkills, destSkills) {
+  if (!fs.existsSync(srcSkills)) return;
+  fs.mkdirSync(destSkills, { recursive: true });
+  const entries = fs.readdirSync(srcSkills, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const srcPath = path.join(srcSkills, entry.name);
+    const destPath = path.join(destSkills, entry.name);
+    if (fs.existsSync(path.join(srcPath, 'SKILL.md'))) {
+      copyRecursive(srcPath, destPath);
+    }
+  }
+}
+
+let installedTargets = [];
+
 function install(target, withExtras) {
   const dirs = TARGETS[target];
   if (!dirs) {
@@ -67,11 +124,14 @@ function install(target, withExtras) {
   const root = path.join(__dirname, '..');
   const profile = withExtras ? 'full' : 'core';
 
-  console.log(`Installing spec-harness (${profile} profile) for ${target}...`);
+  console.log(`Installing spec-harness (${profile} profile) for ${dirs.name}...`);
 
-  if (dirs.skills && fs.existsSync(path.join(root, 'skills'))) {
-    console.log(`  Copying skills to ${dirs.skills}`);
-    copyRecursive(path.join(root, 'skills'), dirs.skills);
+  if (dirs.skills) {
+    const srcSkills = path.join(root, 'skills');
+    if (fs.existsSync(srcSkills)) {
+      console.log(`  Copying skills to ${dirs.skills}`);
+      installSkills(srcSkills, dirs.skills);
+    }
   }
 
   if (dirs.agents && fs.existsSync(path.join(root, 'agents'))) {
@@ -103,7 +163,7 @@ function install(target, withExtras) {
       if (isExtra && !withExtras) continue;
       const srcPath = path.join(integrationsDir, entry.name);
       const destPath = path.join(dirs.integrations, entry.name);
-      console.log(`  Copying integration ${isExtra ? '(extras) ' : ''}${entry.name} to ${destPath}`);
+      console.log(`  Copying integration ${isExtra ? '(extras) ' : ''}${entry.name}`);
       copyRecursive(srcPath, destPath);
     }
   }
@@ -119,7 +179,7 @@ function install(target, withExtras) {
   }
 
   console.log('');
-  console.log('  ✓ spec-harness installed successfully!');
+  console.log(`  ✓ spec-harness installed successfully for ${dirs.name}!`);
   if (withExtras) {
     console.log('  ✓ Extras integrations installed (ui-ux-pro-max, open-design, xiaohei-illustrations, small-business)');
   } else {
@@ -129,14 +189,90 @@ function install(target, withExtras) {
   console.log(`Next steps:`);
   console.log(`  1. Restart your agent or run /using-spec-harness`);
   console.log(`  2. Start with /grill-me for a new feature`);
-  console.log(`  3. Read WORKFLOW/README.md for the full workflow`);
-  if (!withExtras) {
-    console.log(`  4. Re-run with --with-extras for extra design tools`);
+  console.log(`  3. Read README.md for the full workflow`);
+
+  installedTargets.push(target);
+}
+
+function saveState(withExtras) {
+  const version = '1.0.0';
+  const state = {
+    version,
+    targets: [...new Set(installedTargets)],
+    extras: withExtras,
+    installedAt: new Date().toISOString(),
+  };
+  fs.mkdirSync(STATE_DIR, { recursive: true });
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+function autoDetect() {
+  console.log('Auto-detecting installed agents...\n');
+  const detected = [];
+  for (const [key, target] of Object.entries(TARGETS)) {
+    if (key === 'universal') continue;
+    try {
+      if (target.detect()) {
+        detected.push(key);
+        console.log(`  ✓ ${target.name}`);
+      }
+    } catch (e) {
+      // skip if detect throws
+    }
   }
+  console.log('');
+  return detected;
 }
 
 const args = process.argv.slice(2);
 const withExtras = args.includes('--with-extras');
-const target = args.find(a => !a.startsWith('--')) || 'claude';
+const isAuto = args.includes('--auto');
+const noMcp = args.includes('--no-mcp');
+const explicitTarget = args.find(a => !a.startsWith('--'));
 
-install(target, withExtras);
+function configureMcp() {
+  if (noMcp) {
+    console.log('  ℹ️  MCP configuration skipped (--no-mcp)');
+    return;
+  }
+  console.log('  Configuring MCP servers...');
+  try {
+    const mcpScript = path.join(__dirname, 'mcp-config.js');
+    if (fs.existsSync(mcpScript)) {
+      require(mcpScript);
+    } else {
+      console.log('  (mcp-config.js not found)');
+    }
+  } catch (e) {
+    console.log(`  ℹ️  MCP config skipped: ${e.message}`);
+  }
+}
+
+if (isAuto) {
+  const detected = autoDetect();
+  if (detected.length === 0) {
+    console.log('No agents detected. Install to universal path? (y/N)');
+    install('universal', withExtras);
+  } else {
+    for (const target of detected) {
+      install(target, withExtras);
+    }
+  }
+  if (withExtras) configureMcp();
+  saveState(withExtras);
+} else if (explicitTarget) {
+  install(explicitTarget, withExtras);
+  if (withExtras) configureMcp();
+  saveState(withExtras);
+} else {
+  console.log('Usage: node scripts/install.js [--target <agent>] [--with-extras] [--auto]');
+  console.log('');
+  console.log('  --target <agent>   Install for specific agent: ' + Object.keys(TARGETS).filter(k => k !== 'universal').join(', '));
+  console.log('  --with-extras      Install extras integrations (design tools, plugins)');
+  console.log('  --auto             Auto-detect agents and install for all found');
+  console.log('');
+  console.log('  Quick start:');
+  console.log('    npx skills add guillermo-mtz-m/spec-harness  (recommended)');
+  console.log('    node scripts/install.js --auto               (auto-detect + install)');
+  console.log('    node scripts/install.js --target claude      (single agent)');
+}

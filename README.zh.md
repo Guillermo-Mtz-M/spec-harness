@@ -5,11 +5,12 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Skills](https://img.shields.io/badge/skills-15-40c4ff)
 ![Agents](https://img.shields.io/badge/agents-5-b48ead)
-![Integrations](https://img.shields.io/badge/integrations-5-66bb6a)
+![Integrations](https://img.shields.io/badge/integrations-9-66bb6a)
+![Extras](https://img.shields.io/badge/extras-4-ff9800)
 
 **面向 AI 编程智能体的 Spec-Driven Development + Harness Engineering。**
 
-一个可组合的技能系统，将 **Spec-Driven Development（规范驱动开发）**（以规范为事实来源）与 **Harness Engineering（测试工程）**（自动化护栏、上下文精简、验证循环）相结合——通过综合生产级 AI 工作流中的真实模式设计。
+一个可组合的技能系统，将 **Spec-Driven Development（规范驱动开发）**（以规范为事实来源）与 **Harness Engineering（工程框架）**（自动化护栏、上下文精简、验证循环）相结合——通过综合生产级 AI 工作流中的真实模式设计。
 
 适用于 **Claude Code**、**Codex**、**OpenCode**、**Cursor**、**Gemini CLI**，以及任何支持读取 markdown 技能文件的智能体。
 
@@ -42,19 +43,21 @@
 ### 3 步
 
 ```bash
-# 1. 安装 / Install
+# 1. 安装（添加 --with-extras 安装设计工具和插件）
 git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness && node scripts/install.js --target claude
 
-# 2. 访谈 / Interview
+# 2. 访谈
 # 输入 /grill-me — 智能体连环追问，直到弄清楚你真正想要什么
 
-# 3. 编写规范 / Specify
+# 3. 编写规范
 # /spec-author 以 EARS/Gherkin 格式编写 SPEC.md
 # → [人工审批]
 # → [实现 / Implement]
 # → [验证 / Verify]
 # → /ship
 ```
+
+> **扩展包**: 添加 `--with-extras` 以安装 ui-ux-pro-max (96.8k⭐)、open-design (71.6k⭐)、Xiaohei 插画及商业插件。
 
 ### 支持的智能体
 
@@ -95,7 +98,7 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 | `/implement` | 薄垂直切片 + TDD，按切片提交 | 规范已审批，开始构建 |
 | `/tdd-loop` | RED-GREEN-REFACTOR 循环，含验证关卡 | 实现过程中 |
 | `/reviewer` | 裁判：代码是否满足规范？ | 实现完成后 |
-| `/council-review` | 3 个匿名专家审查（规范合规性、性能/边界、安全性）→ 主席综合 | reviewer 之后，mutation-test 之前 |
+| `/council-review` | 3 个匿名专家审查（规范、性能、安全）→ 主席综合 | reviewer 之后，mutation-test 之前 |
 | `/mutation-test` | 杀死变异体或修复测试（≥70% 分数要求） | council-review 批准后 |
 | `/ship` | 提交、PR、changelog、部署清单 | 所有验证通过后 |
 | `/context-engineer` | 上下文精简、渐进加载、外部记忆 | 会话开始、上下文膨胀时 |
@@ -107,7 +110,7 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 
 ---
 
-## 集成（5 个）
+## 集成（9 个）
 
 | 集成 | 增加的功能 | 配置方式 |
 |------|-----------|----------|
@@ -116,6 +119,10 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 | [`bmad-method`](integrations/bmad-method/) | 12+ 专业智能体，尺度自适应规划 | `npx bmad-method install` |
 | [`karpathy-guidelines`](integrations/karpathy-guidelines/) | coding 前思考、简约优先、精准改动 | 复制到 CLAUDE.md |
 | [`context7`](integrations/context7/) | 通过 MCP 获取最新库文档 — 避免幻觉 API | `npx ctx7 setup` |
+| [`ui-ux-pro-max`](integrations/ui-ux-pro-max/) *(扩展)* | 67 种 UI 风格、161 条设计规则、17 个技术栈 — 专业设计系统生成 | `--with-extras` 或手动复制 |
+| [`open-design`](integrations/open-design/) *(扩展)* | 142+ 品牌级 DESIGN.md 合约，多格式输出 (HTML/PDF/PPTX/MP4) | `open-design install --mcp` |
+| [`ian-xiaohei-illustrations`](integrations/ian-xiaohei-illustrations/) *(扩展)* | 中文文章插画 — Xiaohei 手绘风格，用于文档 | `--with-extras` 或手动复制 |
+| [`small-business`](integrations/small-business/) *(扩展)* | 15 个商业命令 — 薪资、现金流、CRM、营销，通过 Claude 使用 | `--with-extras` 或手动复制 |
 
 ---
 
@@ -152,16 +159,18 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 spec-harness/
 ├── skills/               # 15 个技能（核心工作流）
 ├── agents/               # 5 个专业角色
-├── integrations/         # 5 个外部工具集成
-├── templates/            # 5 个产物模板
+├── integrations/         # 9 个集成（5 核心 + 4 扩展）
+├── templates/            # 6 个产物模板
 │   ├── SPEC.md           # EARS/Gherkin 契约
 │   ├── HANDOFF.md        # 会话交接
 │   ├── REVIEW.md         # 裁判裁决
-│   └── MUTATION_REPORT.md # 变异测试结果
+│   ├── MUTATION_REPORT.md # 变异测试结果
+│   ├── COUNCIL-REVIEW.md # 委员会审查综合
+│   └── PRD.md            # 产品需求文档
 ├── references/           # 4 个补充清单
 ├── rules/                # 始终遵循的指南（common、ts、python）
 ├── docs/                 # 各工具配置指南
-├── .claude/commands/     # 9 个 Claude Code 斜杠命令
+├── .claude/commands/     # 16 个 Claude Code 斜杠命令
 └── scripts/              # install.js + validate.js
 ```
 
@@ -176,7 +185,7 @@ spec-harness/
 | Artifact 交接 | ✅ 文件化 | Handoff skill | 无 | Orchestrators | Party mode | Skill 化 |
 | 变异测试 | ✅ 内置 | ❌ | ❌ | ❌ | TEA 模块 | ❌ |
 | 人工审批关卡 | **仅 2 道** | 每任务 | 每任务 | 每命令 | 每阶段 | 每技能 |
-| 外部集成 | 5 个预接 | ❌ | ❌ | Plugin | Modules | 23 个技能 |
+| 外部集成 | 9 个预接 | ❌ | ❌ | Plugin | Modules | 23 个技能 |
 | 智能体角色 | 5 个 | ❌ | 4 个审查员 | 67 个 | 12+ | 23 个专家 |
 | 多审查 council | ✅ /council-review | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -192,5 +201,8 @@ MIT — 可用于项目、团队和工具。
 
 ## 致谢
 
-综合了 9 篇关于 SDD/Harness/多智能体系统的研究文档和 11 个生产参考仓库：
-[mattpocock/skills](https://github.com/mattpocock/skills) · [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) · [affaan-m/ECC](https://github.com/affaan-m/ECC) · [garrytan/gstack](https://github.com/garrytan/gstack) · [obra/superpowers](https://github.com/obra/superpowers) · [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) · [safishamsi/graphify](https://github.com/safishamsi/graphify) · [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) · [upstash/context7](https://github.com/upstash/context7) · [karpathy/llm-council](https://github.com/karpathy/llm-council)
+综合了 SDD/Harness/多智能体系统的研究文档和生产参考仓库：
+
+**核心工作流:** [mattpocock/skills](https://github.com/mattpocock/skills) · [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) · [affaan-m/ECC](https://github.com/affaan-m/ECC) · [garrytan/gstack](https://github.com/garrytan/gstack) · [obra/superpowers](https://github.com/obra/superpowers) · [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) · [safishamsi/graphify](https://github.com/safishamsi/graphify) · [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) · [upstash/context7](https://github.com/upstash/context7) · [karpathy/llm-council](https://github.com/karpathy/llm-council) · [anthropics/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) · [anthropics/code-review](https://github.com/anthropics/claude-code/tree/main/plugins/code-review) · [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done)
+
+**扩展包（使用 `--with-extras` 安装）:** [nextlevelbuilder/ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) · [nexu-io/open-design](https://github.com/nexu-io/open-design) · [helloianneo/xiaohei-illustrations](https://github.com/helloianneo/ian-xiaohei-illustrations) · [anthropic/small-business](https://claude.com/plugins/small-business)

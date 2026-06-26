@@ -5,6 +5,41 @@ All notable changes to Spec-Harness are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] — 2026-06-26
+
+### Added
+
+#### Integrations (4 new extras → 9 total)
+- **`ui-ux-pro-max`** — Professional design system generator: 67 UI styles, 161 design rules, 161 color palettes, 57 font pairings, 17 tech stacks. Credit: @nextlevelbuilder.
+- **`open-design`** — Local-first Claude Design alternative: 142+ DESIGN.md brand contracts, multi-format output (HTML/PDF/PPTX/MP4), HyperFrames video. Credit: @nexu-io.
+- **`ian-xiaohei-illustrations`** — Chinese article illustration generator: Xiaohei hand-drawn style, 8 visual structures, cognitive anchor mapping. Credit: @helloianneo.
+- **`small-business`** — Claude plugin wrapper: 15 business commands (payroll, cash flow, CRM, campaigns). Credit: Anthropic.
+
+#### Installation
+- **`--with-extras` flag** — `install.js` now supports `node scripts/install.js --target claude --with-extras` to install extras integrations alongside core. Two profiles: `core` (15 skills + 5 core integrations) and `full` (all 9 integrations).
+
+#### Research Infrastructure
+- **`Reserch/repos/` restructured** — Split into `spec-harness/` (13 workflow-core references) and `extras/` (4 tool references) with cross-links.
+- **13 new research docs** — gsd-build/get-shit-done (spec-harness), ui-ux-pro-max, open-design, xiaohei-illustrations, small-business (extras).
+- **Star counts updated** — All 17 repos refreshed with current GitHub stats.
+
+### Changed
+- **Integrations count**: 5 → 9
+- **README badges**: Added `extras-4` badge (orange)
+- **README.es.md** — Fully synced with English: 9 integrations, --with-extras, new acknowledgments
+- **README.zh.md** — Fully synced with English: 9 integrations, --with-extras, new acknowledgments
+- **Project structure** — `integrations/` shows 9 (5 core + 4 extras)
+- **Acknowledgments** — Extended to include all 13 workflow + 4 extras repos
+
+### Added (research docs)
+- `Reserch/repos/spec-harness/013-gsd-build-get-shit-done.md`
+- `Reserch/repos/extras/001-nextlevelbuilder-ui-ux-pro-max.md`
+- `Reserch/repos/extras/002-nexu-io-open-design.md`
+- `Reserch/repos/extras/003-helloianneo-ian-xiaohei-illustrations.md`
+- `Reserch/repos/extras/004-anthropics-claude-code-small-business.md`
+
+---
+
 ## [1.2.0] — 2026-06-15
 
 ### Added
@@ -103,8 +138,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- [ ] `examples/` with a bug fix walkthrough
-- [ ] `examples/` with a bug fix walkthrough
 - [ ] Claude Code plugin manifest for marketplace install
 - [ ] Interactive `SPEC.md` template generator skill
 - [ ] Mutation testing framework adapter (stryker, pitest)

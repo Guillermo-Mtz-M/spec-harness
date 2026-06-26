@@ -2,7 +2,10 @@
 
 /**
  * spec-harness installer
- * Copies skills, agents, and rules to the target agent's config directory.
+ * Copies skills, agents, rules, and integrations to the target agent's config directory.
+ * Usage: node scripts/install.js [target] [--with-extras]
+ *   target: claude (default), opencode, cursor
+ *   --with-extras: also install extras integrations (ui-ux-pro-max, open-design, etc.)
  */
 
 const fs = require('fs');
@@ -15,14 +18,29 @@ const TARGETS = {
     agents: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/agents'),
     commands: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/commands'),
     rules: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/rules'),
+    integrations: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/skills/integrations'),
+    templates: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/templates'),
+    references: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/references'),
+    docs: path.join(process.env.HOME || process.env.USERPROFILE, '.claude/docs'),
   },
   opencode: {
-    agents: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode'),
+    agents: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/agents'),
+    skills: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/skills'),
+    integrations: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/skills/integrations'),
+    templates: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/templates'),
+    references: path.join(process.env.HOME || process.env.USERPROFILE, '.opencode/references'),
   },
   cursor: {
     rules: path.join(process.env.HOME || process.env.USERPROFILE, '.cursor/rules'),
   },
 };
+
+const EXTRAS_INTEGRATIONS = [
+  'ui-ux-pro-max',
+  'open-design',
+  'ian-xiaohei-illustrations',
+  'small-business',
+];
 
 function copyRecursive(src, dest) {
   if (!fs.existsSync(src)) return;
@@ -39,7 +57,7 @@ function copyRecursive(src, dest) {
   }
 }
 
-function install(target) {
+function install(target, withExtras) {
   const dirs = TARGETS[target];
   if (!dirs) {
     console.error(`Unknown target: ${target}. Options: ${Object.keys(TARGETS).join(', ')}`);
@@ -47,8 +65,9 @@ function install(target) {
   }
 
   const root = path.join(__dirname, '..');
+  const profile = withExtras ? 'full' : 'core';
 
-  console.log(`Installing spec-harness for ${target}...`);
+  console.log(`Installing spec-harness (${profile} profile) for ${target}...`);
 
   if (dirs.skills && fs.existsSync(path.join(root, 'skills'))) {
     console.log(`  Copying skills to ${dirs.skills}`);
@@ -75,12 +94,49 @@ function install(target) {
     }
   }
 
-  console.log('Done!');
-  console.log(`\nNext steps:`);
+  if (dirs.integrations && fs.existsSync(path.join(root, 'integrations'))) {
+    const integrationsDir = path.join(root, 'integrations');
+    const entries = fs.readdirSync(integrationsDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const isExtra = EXTRAS_INTEGRATIONS.includes(entry.name);
+      if (isExtra && !withExtras) continue;
+      const srcPath = path.join(integrationsDir, entry.name);
+      const destPath = path.join(dirs.integrations, entry.name);
+      console.log(`  Copying integration ${isExtra ? '(extras) ' : ''}${entry.name} to ${destPath}`);
+      copyRecursive(srcPath, destPath);
+    }
+  }
+
+  if (dirs.templates && fs.existsSync(path.join(root, 'templates'))) {
+    console.log(`  Copying templates to ${dirs.templates}`);
+    copyRecursive(path.join(root, 'templates'), dirs.templates);
+  }
+
+  if (dirs.references && fs.existsSync(path.join(root, 'references'))) {
+    console.log(`  Copying references to ${dirs.references}`);
+    copyRecursive(path.join(root, 'references'), dirs.references);
+  }
+
+  console.log('');
+  console.log('  ✓ spec-harness installed successfully!');
+  if (withExtras) {
+    console.log('  ✓ Extras integrations installed (ui-ux-pro-max, open-design, xiaohei-illustrations, small-business)');
+  } else {
+    console.log('  ℹ️  Extras not installed. Use --with-extras for design tools and plugins.');
+  }
+  console.log('');
+  console.log(`Next steps:`);
   console.log(`  1. Restart your agent or run /using-spec-harness`);
   console.log(`  2. Start with /grill-me for a new feature`);
   console.log(`  3. Read WORKFLOW/README.md for the full workflow`);
+  if (!withExtras) {
+    console.log(`  4. Re-run with --with-extras for extra design tools`);
+  }
 }
 
-const target = process.argv[2] || 'claude';
-install(target);
+const args = process.argv.slice(2);
+const withExtras = args.includes('--with-extras');
+const target = args.find(a => !a.startsWith('--')) || 'claude';
+
+install(target, withExtras);

@@ -5,7 +5,8 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Skills](https://img.shields.io/badge/skills-15-40c4ff)
 ![Agents](https://img.shields.io/badge/agents-5-b48ead)
-![Integrations](https://img.shields.io/badge/integrations-5-66bb6a)
+![Integrations](https://img.shields.io/badge/integrations-9-66bb6a)
+![Extras](https://img.shields.io/badge/extras-4-ff9800)
 
 **Spec-Driven Development + Harness Engineering for AI coding agents.**
 
@@ -42,7 +43,7 @@ Everything between gates is automated by the harness.
 ### 3 Steps
 
 ```bash
-# 1. Install
+# 1. Install (add --with-extras for design tools & plugins)
 git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness && node scripts/install.js --target claude
 
 # 2. Interview
@@ -55,6 +56,8 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 # → [Verify]
 # → /ship
 ```
+
+> **Extras**: Add `--with-extras` to install ui-ux-pro-max (96.8k⭐), open-design (71.6k⭐), Xiaohei illustrations, and small-business plugins.
 
 ### Supported Agents
 
@@ -107,7 +110,7 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 
 ---
 
-## Integrations (5)
+## Integrations (9)
 
 | Integration | What it adds | Setup |
 |-------------|-------------|-------|
@@ -116,6 +119,10 @@ git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness
 | [`bmad-method`](integrations/bmad-method/) | 12+ specialized agents, scale-adaptive planning | `npx bmad-method install` |
 | [`karpathy-guidelines`](integrations/karpathy-guidelines/) | Think before coding, simplicity first, surgical changes | Copy to CLAUDE.md |
 | [`context7`](integrations/context7/) | Up-to-date library docs via MCP — no hallucinated APIs | `npx ctx7 setup` |
+| [`ui-ux-pro-max`](integrations/ui-ux-pro-max/) *(extras)* | 67 UI styles, 161 design rules, 17 tech stacks — professional design system generation | `--with-extras` or manual copy |
+| [`open-design`](integrations/open-design/) *(extras)* | 142+ brand-grade DESIGN.md contracts, multi-format output (HTML/PDF/PPTX/MP4) | `open-design install --mcp` |
+| [`ian-xiaohei-illustrations`](integrations/ian-xiaohei-illustrations/) *(extras)* | Chinese article illustrations — Xiaohei hand-drawn style for docs | `--with-extras` or manual copy |
+| [`small-business`](integrations/small-business/) *(extras)* | 15 business commands — payroll, cash flow, CRM, campaigns via Claude | `--with-extras` or manual copy |
 
 ---
 
@@ -195,5 +202,8 @@ MIT — use in projects, teams, and tools.
 
 ## Acknowledgments
 
-Synthesized from 9 research documents on SDD/Harness/multiagent systems and 11 production reference repos:
-[mattpocock/skills](https://github.com/mattpocock/skills) · [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) · [affaan-m/ECC](https://github.com/affaan-m/ECC) · [garrytan/gstack](https://github.com/garrytan/gstack) · [obra/superpowers](https://github.com/obra/superpowers) · [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) · [safishamsi/graphify](https://github.com/safishamsi/graphify) · [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) · [upstash/context7](https://github.com/upstash/context7) · [karpathy/llm-council](https://github.com/karpathy/llm-council)
+Synthesized from research documents on SDD/Harness/multiagent systems and production reference repos:
+
+**Workflow core:** [mattpocock/skills](https://github.com/mattpocock/skills) · [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) · [affaan-m/ECC](https://github.com/affaan-m/ECC) · [garrytan/gstack](https://github.com/garrytan/gstack) · [obra/superpowers](https://github.com/obra/superpowers) · [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) · [safishamsi/graphify](https://github.com/safishamsi/graphify) · [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) · [upstash/context7](https://github.com/upstash/context7) · [karpathy/llm-council](https://github.com/karpathy/llm-council) · [anthropics/skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) · [anthropics/code-review](https://github.com/anthropics/claude-code/tree/main/plugins/code-review) · [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done)
+
+**Extras (install via `--with-extras`):** [nextlevelbuilder/ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) · [nexu-io/open-design](https://github.com/nexu-io/open-design) · [helloianneo/xiaohei-illustrations](https://github.com/helloianneo/ian-xiaohei-illustrations) · [anthropic/small-business](https://claude.com/plugins/small-business)

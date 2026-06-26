@@ -1,9 +1,12 @@
 # Gemini CLI Setup
 
-## Install
+## Install (Recommended)
 
 ```bash
-# From GitHub
+# Via skills.sh (auto-detects Gemini CLI)
+npx skills add guillermo-mtz-m/spec-harness
+
+# Or via gemini extensions
 gemini extensions install https://github.com/Guillermo-Mtz-M/spec-harness
 
 # Or from local clone
@@ -44,3 +47,13 @@ gemini skill run using-spec-harness
 
 Core: graphify, superpowers, bmad-method, karpathy-guidelines, context7
 Extras (`--with-extras`): ui-ux-pro-max, open-design, ian-xiaohei-illustrations, small-business
+
+## Updating
+
+```bash
+# Via skills.sh (recommended)
+npx skills update
+
+# Via git
+cd spec-harness && git pull && gemini extensions install ./spec-harness
+```

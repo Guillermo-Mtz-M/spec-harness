@@ -1,9 +1,12 @@
 # Claude Code Setup
 
-## Install
+## Install (Recommended)
 
 ```bash
-# Core workflow (15 skills + 5 core integrations)
+# Via skills.sh (auto-detects Claude Code)
+npx skills add guillermo-mtz-m/spec-harness
+
+# Or via git (offline/CI)
 git clone https://github.com/Guillermo-Mtz-M/spec-harness.git
 cd spec-harness
 node scripts/install.js --target claude
@@ -86,6 +89,10 @@ Extras (install with `--with-extras`):
 ## Updating
 
 ```bash
+# Via skills.sh (recommended)
+npx skills update
+
+# Via git
 cd spec-harness
 git pull
 node scripts/install.js --target claude [--with-extras]

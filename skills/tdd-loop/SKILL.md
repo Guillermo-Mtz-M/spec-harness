@@ -1,49 +1,51 @@
 ---
 name: tdd-loop
-description: Red-Green-Refactor TDD cycle with verification gates. Use during implementation.
-triggers: ["tdd", "red green refactor", "test driven", "write test first"]
+description: RED-GREEN-REFACTOR cycle with verification gates. Use during implementation.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["tdd", "test first", "red green", "refactor"]
 ---
-
 # TDD Loop
 
 Enforce the Red-Green-Refactor cycle. Write a failing test. Make it pass. Refactor. Commit. Repeat.
 
 ## Overview
 
-Tests are not an afterthought — they are the specification in executable form. The TDD loop ensures every piece of code is born with a test that proves it works.
+Tests are not an afterthought â€” they are the specification in executable form. The TDD loop ensures every piece of code is born with a test that proves it works.
 
 ## When to Use
 
-- During `/implement` — for every vertical slice
-- Fixing a bug — write a test that reproduces it first
-- Refactoring — ensure tests pass before and after
+- During `/implement` â€” for every vertical slice
+- Fixing a bug â€” write a test that reproduces it first
+- Refactoring â€” ensure tests pass before and after
 
 ## Process
 
-### Phase 1: RED — Write a Failing Test
+### Phase 1: RED â€” Write a Failing Test
 
 1. Pick one Gherkin scenario from `SPEC.md`
 2. Write a test that expresses the scenario's `Then` assertion
-3. Run the test — it must FAIL
+3. Run the test â€” it must FAIL
 4. If it passes, the test is wrong (or the feature already exists)
 
 **Red gate:** Test fails for the RIGHT reason (assertion error, not setup error).
 
-### Phase 2: GREEN — Make It Pass
+### Phase 2: GREEN â€” Make It Pass
 
 1. Write the MINIMUM code to make the test pass
 2. Do NOT add features beyond what the test requires
 3. Do NOT add abstractions that aren't needed yet
-4. Run the test — it must PASS
+4. Run the test â€” it must PASS
 
 **Green gate:** Test passes. No other tests broke.
 
-### Phase 3: REFACTOR — Clean Up
+### Phase 3: REFACTOR â€” Clean Up
 
 1. Look at the code. Is it simple? Does it follow the project's conventions?
 2. Can 200 lines be 50?
 3. Remove duplication. Deepen modules. Clarify names.
-4. Run ALL tests — must still pass
+4. Run ALL tests â€” must still pass
 5. Commit
 
 **Refactor gate:** All tests pass. No behavior changed.
@@ -76,7 +78,7 @@ Pick the next Gherkin scenario. Go to Phase 1.
 | "This is too simple to test" | Then the test is simple to write. 3 lines of assert. |
 | "Testing this is hard" | Hard-to-test code is a design smell. Simplify the design. |
 | "I need to see it working first" | Write a test that shows it working. That's the point. |
-| "Mocking makes this easier" | Mocks don't prove your code works — they prove your mocks work. Mock external boundaries only. |
+| "Mocking makes this easier" | Mocks don't prove your code works â€” they prove your mocks work. Mock external boundaries only. |
 
 ## Verification
 

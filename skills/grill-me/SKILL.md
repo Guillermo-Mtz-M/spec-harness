@@ -1,9 +1,11 @@
 ---
 name: grill-me
 description: Relentless interview that extracts what you actually want before any code is written. Use when starting any non-trivial change.
+version: 1.0.0
+license: MIT
+allowed-tools: []
 triggers: ["grill me", "interview", "what do I want", "help me think through this"]
 ---
-
 # Grill-Me
 
 Interrogate the user until every branch of the decision tree is resolved. No code until the grilling is complete.
@@ -29,7 +31,7 @@ Start with the broadest question, then drill down:
 
 1. "What problem does this solve for the end user?"
 2. "Who are the users? What's their skill level?"
-3. "What does success look like? (Be specific — name the outcome)"
+3. "What does success look like? (Be specific â€” name the outcome)"
 4. "What happens when this fails? What's the degraded experience?"
 5. "What are the hard boundaries? (Things we will NOT do)"
 

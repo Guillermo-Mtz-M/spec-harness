@@ -1,9 +1,11 @@
 ---
 name: mutation-tester
-description: Adversarial mutation testing — kill the mutants or fix the code. Use after reviewer approves.
-triggers: ["mutation test", "mutate", "adversarial test", "kill mutants"]
+description: Adversarial mutation testing requiring >=70% mutation score. Use after council-review approves.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["mutation", "adversarial test", "kill mutants"]
 ---
-
 # Mutation Tester
 
 Automatically inject faults into the code. If the test suite doesn't catch them, the tests are weak. Kill the mutants or fix the tests.
@@ -22,13 +24,13 @@ This is the final verification before human approval gate #2.
 
 ## Input Artifacts
 
-- `SPEC.md` — requirements
+- `SPEC.md` â€” requirements
 - Implementation code + tests
-- `REVIEW.md` — reviewer verdict
+- `REVIEW.md` â€” reviewer verdict
 
 ## Output Artifact
 
-- `MUTATION_REPORT.md` — mutation results and coverage
+- `MUTATION_REPORT.md` â€” mutation results and coverage
 
 ## Process
 
@@ -38,12 +40,12 @@ For each function/method in the changed code, apply these mutation operators:
 
 | Operator | Description | Example |
 |----------|-------------|---------|
-| Arithmetic | Replace operator | `+` → `-`, `*` → `/` |
-| Logical | Replace connector | `&&` → `\|\|`, `!` → `` |
-| Conditional | Change boundary | `<` → `<=`, `==` → `!=` |
-| Return value | Replace return | `return x` → `return 0` / `return null` |
+| Arithmetic | Replace operator | `+` â†’ `-`, `*` â†’ `/` |
+| Logical | Replace connector | `&&` â†’ `\|\|`, `!` â†’ `` |
+| Conditional | Change boundary | `<` â†’ `<=`, `==` â†’ `!=` |
+| Return value | Replace return | `return x` â†’ `return 0` / `return null` |
 | Statement deletion | Remove line | Delete an assignment or method call |
-| Variable replacement | Swap variable | `user.id` → `user.name` |
+| Variable replacement | Swap variable | `user.id` â†’ `user.name` |
 
 ### Step 2: Run Mutants
 
@@ -51,22 +53,22 @@ For each mutant:
 1. Apply the mutation to the source
 2. Run the test suite
 3. Record result:
-   - **KILLED** — at least one test fails (good)
-   - **SURVIVED** — all tests pass (bad — tests don't catch this bug)
-   - **TIMEOUT** — test suite hangs (neutral — inconclusive)
+   - **KILLED** â€” at least one test fails (good)
+   - **SURVIVED** â€” all tests pass (bad â€” tests don't catch this bug)
+   - **TIMEOUT** â€” test suite hangs (neutral â€” inconclusive)
 
 ### Step 3: Analyze Surviving Mutants
 
 For each surviving mutant, determine the root cause:
 
-1. **Weak test** — the test exists but doesn't assert this behavior → FIX the test
-2. **Missing test** — no test covers this code path → ADD a test
-3. **Equivalent mutant** — the mutation doesn't change observable behavior → DOCUMENT and skip
+1. **Weak test** â€” the test exists but doesn't assert this behavior â†’ FIX the test
+2. **Missing test** â€” no test covers this code path â†’ ADD a test
+3. **Equivalent mutant** â€” the mutation doesn't change observable behavior â†’ DOCUMENT and skip
 
 ### Step 4: Fix or Document
 
 For each survived mutant:
-- If fixable: add or improve a test → re-run → verify KILLED
+- If fixable: add or improve a test â†’ re-run â†’ verify KILLED
 - If equivalent: document why in the report
 
 ### Step 5: Write Report
@@ -82,17 +84,17 @@ For each survived mutant:
 - Timeout: T
 
 ### Target
-- Mutation score ≥ 70% (industry standard for meaningful test quality)
+- Mutation score â‰¥ 70% (industry standard for meaningful test quality)
 - No survived mutants without documented justification
 
 ### Survived Mutants
 | Line | Mutation | Root Cause | Action |
 |------|----------|-------------|--------|
-| file.ts:42 | `+` → `-` | Missing test for error path | ADDED test_check_invalid_sum |
-| file.ts:87 | `<` → `<=` | Equivalent (boundary is inclusive) | DOCUMENTED |
+| file.ts:42 | `+` â†’ `-` | Missing test for error path | ADDED test_check_invalid_sum |
+| file.ts:87 | `<` â†’ `<=` | Equivalent (boundary is inclusive) | DOCUMENTED |
 
 ### Verdict: [PASS | FAIL]
-- PASS: Mutation score ≥ 70%, all survivors documented
+- PASS: Mutation score â‰¥ 70%, all survivors documented
 - FAIL: Mutation score < 70% or undocumented survivors
 ```
 
@@ -108,7 +110,7 @@ For each survived mutant:
 
 ## Verification
 
-- [ ] Mutation score ≥ 70%
+- [ ] Mutation score â‰¥ 70%
 - [ ] Every surviving mutant has a documented justification
 - [ ] All newly added tests pass
 - [ ] Report is complete and actionable

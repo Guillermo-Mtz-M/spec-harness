@@ -2,7 +2,7 @@
 
 /**
  * Validate spec-harness skill structure.
- * Skills must have: name, description, triggers, Overview, When to Use, Process, Anti-Rationalization, Verification
+ * Skills must have: YAML frontmatter (name, description, version, license, allowed-tools, triggers) + body sections
  * Agents must have: Operating Rules section
  * Templates must have: # headers
  * References must have: # headers
@@ -11,20 +11,40 @@
 const fs = require('fs');
 const path = require('path');
 
-const SKILL_REQUIRED = [
+const SKILL_FRONTMATTER = [
   'name:',
   'description:',
+  'version:',
+  'license:',
+  'allowed-tools:',
   'triggers:',
+];
+
+const SKILL_SECTIONS = [
   'Overview',
   'When to Use',
   'Process',
-  'Anti-Rationalization',
   'Verification',
 ];
 
 const AGENT_REQUIRED = ['Operating Rules', '## Output'];
 
 const root = path.join(__dirname, '..');
+
+function hasValidYamlFrontmatter(content) {
+  // Must start with --- and have closing --- within first 20 lines
+  const lines = content.split('\n');
+  if (lines.length < 3) return false;
+  if (lines[0].trim() !== '---') return false;
+  let endIdx = -1;
+  for (let i = 1; i < Math.min(lines.length, 20); i++) {
+    if (lines[i].trim() === '---') {
+      endIdx = i;
+      break;
+    }
+  }
+  return endIdx > 0;
+}
 
 function validateFile(artifact) {
   const filePath = path.join(root, artifact);
@@ -35,9 +55,16 @@ function validateFile(artifact) {
   const content = fs.readFileSync(filePath, 'utf8');
 
   if (artifact.startsWith('skills/') && artifact.endsWith('/SKILL.md')) {
-    const missing = SKILL_REQUIRED.filter((s) => !content.includes(s));
-    if (missing.length > 0) {
-      return { artifact, status: 'FAIL', missing };
+    if (!hasValidYamlFrontmatter(content)) {
+      return { artifact, status: 'FAIL', missing: ['Valid YAML frontmatter (--- ... ---)'] };
+    }
+    const missingFm = SKILL_FRONTMATTER.filter((s) => !content.includes(s));
+    if (missingFm.length > 0) {
+      return { artifact, status: 'FAIL', missing: missingFm.map(s => `frontmatter: ${s}`) };
+    }
+    const missingSections = SKILL_SECTIONS.filter((s) => !content.includes(s));
+    if (missingSections.length > 0) {
+      return { artifact, status: 'FAIL', missing: missingSections.map(s => `section: ${s}`) };
     }
     return { artifact, status: 'PASS' };
   }

@@ -1,1 +1,1 @@
-Write an EARS/Gherkin spec from the grilling output or current conversation context. Every requirement uses EARS notation with Gherkin scenarios, verification criteria, and explicit boundaries. Present for human approval (Approval Gate #1).
+Load and execute the spec-author skill from skills/spec-author/SKILL.md. Transform grilling output into EARS/Gherkin spec.

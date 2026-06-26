@@ -1,1 +1,1 @@
-Map your current task to the right Spec-Harness skill. Ask "what are you doing?" and route to the correct workflow. Start here if you're unsure which skill to use or how the skills connect.
+Load and execute the using-spec-harness skill from skills/using-spec-harness/SKILL.md. Map user task to the right spec-harness skill.

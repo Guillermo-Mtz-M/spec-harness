@@ -1,9 +1,11 @@
 ---
 name: spec-author
 description: Writes EARS/Gherkin spec with acceptance criteria and boundaries. Use after /grill-me, before coding.
+version: 1.0.0
+license: MIT
+allowed-tools: []
 triggers: ["spec author", "write spec", "spec this", "create requirements"]
 ---
-
 # Spec Author
 
 Transform the grilling output into a precise, verifiable spec using EARS notation and Gherkin scenarios. This spec is the contract between the human and the agents.
@@ -16,7 +18,7 @@ The spec is the single source of truth. Every line of implementation traces back
 
 - After `/grill-me` completes
 - When you have a clear idea but need to formalize it
-- Before `/implement` — always
+- Before `/implement` â€” always
 - When converting a vague request into actionable requirements
 
 ## Input Artifacts
@@ -27,7 +29,7 @@ The spec is the single source of truth. Every line of implementation traces back
 
 ## Output Artifact
 
-- `SPEC.md` — The requirements document, replacing previous version
+- `SPEC.md` â€” The requirements document, replacing previous version
 
 ## Process
 
@@ -77,9 +79,9 @@ For each requirement, state how it will be verified:
 
 ```markdown
 ## Verification
-- [REQ-001]: Unit test — given input X, expect output Y
-- [REQ-002]: Integration test — given API call, expect response Z
-- [REQ-003]: Manual check — visual alignment matches design
+- [REQ-001]: Unit test â€” given input X, expect output Y
+- [REQ-002]: Integration test â€” given API call, expect response Z
+- [REQ-003]: Manual check â€” visual alignment matches design
 ```
 
 ### Step 5: Present for Approval
@@ -94,7 +96,7 @@ Show the spec to the user in sections. Wait for explicit approval before proceed
 |--------|----------|
 | "I'll write the spec as I code" | That's not a spec, that's a commit message. Spec before code, always. |
 | "The spec is too detailed for this small change" | Small changes need small specs. Even 2 EARS requirements is better than none. |
-| "Agile means no spec" | Agile means working software over documentation — not broken software over clarity. |
+| "Agile means no spec" | Agile means working software over documentation â€” not broken software over clarity. |
 | "I'll skip Gherkin, plain English is fine" | Plain English is ambiguous. Gherkin is verifiable. The spec must be testable. |
 
 ## Verification

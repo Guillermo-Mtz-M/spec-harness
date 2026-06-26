@@ -1,8 +1,11 @@
 # Cursor Setup
 
-## Install
+## Install (Recommended)
 
 ```bash
+# Via skills.sh (auto-detects Cursor)
+npx skills add guillermo-mtz-m/spec-harness
+
 # Run installer
 node scripts/install.js --target cursor
 
@@ -36,6 +39,16 @@ Cursor loads rules from `~/.cursor/rules/`. Each skill file becomes a rule that 
 
 Core (auto-installed): graphify, superpowers, bmad-method, karpathy-guidelines, context7
 Extras (`--with-extras`): ui-ux-pro-max, open-design, ian-xiaohei-illustrations, small-business
+
+## Updating
+
+```bash
+# Via skills.sh (recommended)
+npx skills update
+
+# Via git
+cd spec-harness && git pull && node scripts/install.js --target cursor [--with-extras]
+```
 
 ## Quick Start
 

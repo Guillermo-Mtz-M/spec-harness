@@ -1,9 +1,11 @@
 ---
 name: ship
-description: Commit, PR, changelog, deploy checklist. Use after all verification passes.
-triggers: ["ship", "deploy", "launch", "push to main", "create a PR"]
+description: Commit, PR, changelog, and deploy checklist. Use after everything is verified.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["ship", "deploy", "push to main", "release"]
 ---
-
 # Ship
 
 All verification passed. Time to get it into production. Commit cleanly, write a meaningful changelog, create the PR, verify deployment.
@@ -30,9 +32,9 @@ Shipping is the final step, not an afterthought. The ship skill ensures a clean 
 
 ### Step 1: Verify Clean State
 
-1. Run the full test suite — all tests must pass
-2. Run the linter — no errors
-3. Run type checker (if applicable) — no errors
+1. Run the full test suite â€” all tests must pass
+2. Run the linter â€” no errors
+3. Run type checker (if applicable) â€” no errors
 4. Check for uncommitted changes
 
 ### Step 2: Final Commit
@@ -53,13 +55,13 @@ Add entry to `CHANGELOG.md`:
 ## [version] - YYYY-MM-DD
 
 ### Added
-- [feature] ([REQ-XXX]) — [description]
+- [feature] ([REQ-XXX]) â€” [description]
 
 ### Fixed
-- [bug] — [description]
+- [bug] â€” [description]
 
 ### Breaking
-- [breaking change] — [migration guide]
+- [breaking change] â€” [migration guide]
 ```
 
 ### Step 4: Create PR

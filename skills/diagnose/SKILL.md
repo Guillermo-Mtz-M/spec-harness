@@ -1,9 +1,11 @@
 ---
 name: diagnose
-description: Systematic debugging — reproduce, minimize, hypothesize, fix, guard. Use when something is broken.
-triggers: ["diagnose", "debug", "broken", "bug", "regression", "it was working yesterday"]
+description: Systematic debugging: reproduce, minimize, hypothesize, fix, guard. Use for bugs or regressions.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["diagnose", "debug", "bug", "broken", "fix this"]
 ---
-
 # Diagnose
 
 Disciplined diagnosis loop for hard bugs and performance regressions. No guessing. No "try this and see." Reproduce. Minimize. Hypothesize. Fix. Guard.
@@ -44,7 +46,7 @@ Debugging is engineering, not divination. The diagnosis skill enforces a scienti
 2. List the top 3 possible causes, ranked by probability
 3. Design an experiment to test each hypothesis (one at a time)
 
-**Gate:** Can you falsify your hypothesis? If not, it's not a hypothesis — it's a guess.
+**Gate:** Can you falsify your hypothesis? If not, it's not a hypothesis â€” it's a guess.
 
 ### Step 4: Fix
 

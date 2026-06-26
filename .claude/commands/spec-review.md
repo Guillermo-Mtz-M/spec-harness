@@ -1,1 +1,1 @@
-Fresh-context review of SPEC.md against ambiguity checklist before human approval. Produce REVIEW.md with PASS/FLAG/BLOCK verdicts per requirement. Challenge vague language, missing edge cases, and untestable criteria.
+Load and execute the spec-review skill from skills/spec-review/SKILL.md. Fresh-context review of spec against ambiguity checklist.

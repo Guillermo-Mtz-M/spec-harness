@@ -1,9 +1,11 @@
 ---
 name: subagent-driven-dev
-description: Dispatch fresh subagents per task with artifact handoff. Use for multi-task specs.
-triggers: ["subagent", "parallel dev", "dispatch agents", "multi agent"]
+description: Dispatch fresh subagents per task via file artifacts. Use for multi-slice specs.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["subagent", "dispatch", "parallel tasks", "multi-agent"]
 ---
-
 # Subagent-Driven Development
 
 Break the plan into tasks. Each task gets a fresh subagent with its own context. The orchestrator reviews each result before proceeding. Artifacts (not conversation history) are the handoff mechanism.
@@ -26,25 +28,25 @@ Based on the Harness Engineering principle: **handoff entre agentes por ficheros
 
 From the approved plan, identify:
 
-1. **Sequential tasks** — must complete before the next starts (dependencies)
-2. **Parallel tasks** — can run simultaneously (no dependencies between them)
+1. **Sequential tasks** â€” must complete before the next starts (dependencies)
+2. **Parallel tasks** â€” can run simultaneously (no dependencies between them)
 
 ### Step 2: Define Agent Chunks
 
 For each task, define:
-- **Input artifact** — what the agent reads (SPEC.md, previous task's output)
-- **Instructions** — which skill to use (/implement, /tdd-loop, etc.)
-- **Output artifact** — what the agent produces (code, test results, REVIEW.md)
-- **Success criteria** — how the orchestrator verifies completion
+- **Input artifact** â€” what the agent reads (SPEC.md, previous task's output)
+- **Instructions** â€” which skill to use (/implement, /tdd-loop, etc.)
+- **Output artifact** â€” what the agent produces (code, test results, REVIEW.md)
+- **Success criteria** â€” how the orchestrator verifies completion
 
 ### Step 3: Dispatch
 
 ```
 Orchestrator
-├── Agent 1 (fresh context): Slice 1 → produces code + tests
-├── Agent 2 (after Agent 1): Slice 2 (depends on 1) → produces code + tests
-├── Agent 3 (parallel with 2): Slice 3 (independent) → produces code + tests
-└── Agent 4 (after all): /reviewer → produces REVIEW.md
+â”œâ”€â”€ Agent 1 (fresh context): Slice 1 â†’ produces code + tests
+â”œâ”€â”€ Agent 2 (after Agent 1): Slice 2 (depends on 1) â†’ produces code + tests
+â”œâ”€â”€ Agent 3 (parallel with 2): Slice 3 (independent) â†’ produces code + tests
+â””â”€â”€ Agent 4 (after all): /reviewer â†’ produces REVIEW.md
 ```
 
 ### Step 4: Review Each Agent's Output
@@ -57,8 +59,8 @@ For each completed agent:
 
 ### Step 5: Two-Stage Review
 
-1. **Spec compliance** — does the output match what the spec required?
-2. **Code quality** — is the code simple, clean, and idiomatic?
+1. **Spec compliance** â€” does the output match what the spec required?
+2. **Code quality** â€” is the code simple, clean, and idiomatic?
 
 Critical issues block progress. Non-critical issues are logged but don't stop forward motion.
 

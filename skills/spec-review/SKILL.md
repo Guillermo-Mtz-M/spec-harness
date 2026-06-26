@@ -1,12 +1,14 @@
 ---
 name: spec-review
-description: Independent review of spec against ambiguity checklist. Use before approving the spec.
-triggers: ["spec review", "review spec", "is this spec good enough"]
+description: Fresh-context review of a spec against ambiguity checklist. Use before approving the spec.
+version: 1.0.0
+license: MIT
+allowed-tools: []
+triggers: ["spec review", "review spec", "spec quality", "check spec"]
 ---
-
 # Spec Review
 
-An independent agent reviews the spec for ambiguity, incompleteness, and testability. Fresh context — no author bias.
+An independent agent reviews the spec for ambiguity, incompleteness, and testability. Fresh context â€” no author bias.
 
 ## Overview
 
@@ -61,10 +63,10 @@ Format:
 ## Spec Review
 
 ### BLOCK (must fix before approval)
-- [REQ-XXX]: [ambiguity or contradiction] — "X could mean A or B"
+- [REQ-XXX]: [ambiguity or contradiction] â€” "X could mean A or B"
 
 ### FLAG (should fix, but not blocker)
-- [REQ-XXX]: [weakness] — "No error behavior specified for case Y"
+- [REQ-XXX]: [weakness] â€” "No error behavior specified for case Y"
 
 ### PASS (no issues)
 - [REQ-XXX]: Clear, testable, unambiguous

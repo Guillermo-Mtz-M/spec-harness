@@ -7,12 +7,13 @@
 ![Agents](https://img.shields.io/badge/agents-5-b48ead)
 ![Integrations](https://img.shields.io/badge/integrations-9-66bb6a)
 ![Extras](https://img.shields.io/badge/extras-4-ff9800)
+![Platforms](https://img.shields.io/badge/platforms-12%2B-8A2BE2)
 
 **Spec-Driven Development + Harness Engineering for AI coding agents.**
 
 A composable skill system combining **Spec-Driven Development** (spec as source of truth) with **Harness Engineering** (automated guardrails, context minimization, verification loops) — designed by synthesizing real-world patterns from production AI workflows.
 
-Works with **Claude Code**, **Codex**, **OpenCode**, **Cursor**, **Gemini CLI**, and any agent that reads markdown skills.
+Works with **Claude Code**, **Codex**, **OpenCode**, **Cursor**, **Gemini CLI**, **Antigravity**, **Windsurf**, **Copilot**, and [12+ platforms](#works-on-all-platforms).
 
 ---
 
@@ -40,33 +41,59 @@ Everything between gates is automated by the harness.
 
 ## Quick Start
 
-### 3 Steps
+### 1 Command
 
 ```bash
-# 1. Install (add --with-extras for design tools & plugins)
+# Install spec-harness on ALL your agents (auto-detects Claude, Codex, Cursor, etc.)
+npx skills add guillermo-mtz-m/spec-harness
+
+# Or use the classic installer for offline/CI:
 git clone https://github.com/Guillermo-Mtz-M/spec-harness.git && cd spec-harness && node scripts/install.js --target claude
-
-# 2. Interview
-# Type /grill-me — the agent interrogates you about what you actually want
-
-# 3. Specify
-# /spec-author writes SPEC.md in EARS/Gherkin
-# → [HUMAN APPROVES]
-# → [Implement]
-# → [Verify]
-# → /ship
 ```
 
 > **Extras**: Add `--with-extras` to install ui-ux-pro-max (96.8k⭐), open-design (71.6k⭐), Xiaohei illustrations, and small-business plugins.
 
-### Supported Agents
+### Then Use
 
-| Agent | Install |
-|-------|---------|
-| Claude Code | `node scripts/install.js --target claude` |
-| OpenCode | `node scripts/install.js --target opencode` |
-| Cursor | `node scripts/install.js --target cursor` |
-| Gemini CLI | `gemini extensions install https://github.com/Guillermo-Mtz-M/spec-harness` |
+```bash
+# Just start working — the agent discovers skills automatically
+# "I want to build a new feature" → /grill-me activates
+# Or type a skill directly:
+/grill-me    # Interview
+/spec-author # Write spec
+/implement   # Build with TDD
+/ship        # Deploy
+```
+
+### Works on All Platforms
+
+| Agent | Auto-detect | Install |
+|-------|:-----------:|---------|
+| **Claude Code** | ✅ | `npx skills add ...` or `node scripts/install.js --target claude` |
+| **Codex CLI** | ✅ | `npx skills add ...` |
+| **Cursor** | ✅ | `npx skills add ...` |
+| **OpenCode** | ✅ | `npx skills add ...` or `node scripts/install.js --target opencode` |
+| **Gemini CLI** | ✅ | `npx skills add ...` or `gemini extensions install https://github.com/Guillermo-Mtz-M/spec-harness` |
+| **Antigravity IDE** | ✅ | `npx skills add ...` |
+| **Antigravity CLI** | ✅ | `npx skills add ...` |
+| **Windsurf / Devin** | ✅ | `npx skills add ...` |
+| **GitHub Copilot** | ✅ | `npx skills add ...` |
+| **Kiro** | ✅ | `npx skills add ...` |
+| **Factory Droid** | ✅ | `npx skills add ...` |
+| **Aider** | ✅ | `npx skills add ...` |
+
+### Updating
+
+```bash
+# Via skills.sh (all agents)
+npx skills update
+
+# Via git (offline/CI)
+cd spec-harness && git pull && node scripts/install.js --target claude [--with-extras]
+
+# Check for updates without installing
+npx skills check
+```
 
 ---
 
@@ -170,8 +197,8 @@ spec-harness/
 ├── references/           # 4 supplementary checklists
 ├── rules/                # Always-follow guidelines (common, ts, python)
 ├── docs/                 # Setup guides (Claude, OpenCode, Cursor, Gemini)
-├── .claude/commands/     # 16 slash commands for Claude Code
-└── scripts/              # install.js + validate.js
+├── .claude/commands/     # 15 slash commands for Claude Code
+└── scripts/              # install.js + validate.js + update.js
 ```
 
 ---

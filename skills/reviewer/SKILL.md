@@ -1,12 +1,14 @@
 ---
 name: reviewer
 description: Fresh-context judge reviews implementation against the spec. Use after implementation, before shipping.
+version: 1.0.0
+license: MIT
+allowed-tools: []
 triggers: ["review", "judge", "check against spec", "does this meet requirements"]
 ---
-
 # Reviewer (Judge)
 
-A fresh-context agent reviews the code against the spec. Not style opinions — spec compliance. The spec is the judge, not the reviewer's preferences.
+A fresh-context agent reviews the code against the spec. Not style opinions â€” spec compliance. The spec is the judge, not the reviewer's preferences.
 
 ## Overview
 
@@ -20,7 +22,7 @@ This is the Uncle Bob Judge pattern: an independent agent, with fresh context (o
 
 ## Input Artifacts
 
-- `SPEC.md` — the approved requirements
+- `SPEC.md` â€” the approved requirements
 - Implementation code (files changed since spec approval)
 - Test suite output (all tests passing)
 
@@ -51,7 +53,7 @@ For each EARS requirement in the spec:
 **Verdict: PASS | FAIL | PARTIAL**
 
 **Evidence:**
-- [test name] passes — covers [scenario]
+- [test name] passes â€” covers [scenario]
 - [code location] implements [behavior]
 
 **Gap (if FAIL/PARTIAL):**
@@ -90,9 +92,9 @@ For the test suite, check:
 
 When this review feeds into `/council-review`, reviewer identity must be stripped before synthesis. This prevents the chairman from anchoring on reviewer labels instead of evidence logic. The principle (from karpathy/llm-council):
 
-- **Identity concealment** — Reviews are presented as anonymous perspectives, not "Review A by [persona]"
-- **No favoritism** — The chairman evaluates logic, not who said it
-- **No anchoring** — Removing labels prevents biasing synthesis toward any single perspective
+- **Identity concealment** â€” Reviews are presented as anonymous perspectives, not "Review A by [persona]"
+- **No favoritism** â€” The chairman evaluates logic, not who said it
+- **No anchoring** â€” Removing labels prevents biasing synthesis toward any single perspective
 
 This principle applies when reviews enter the council pipeline. For standalone `/reviewer` usage, it documents the anti-bias stance that underpins all review processes.
 

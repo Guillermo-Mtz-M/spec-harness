@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0] — 2026-06-26
+## [1.1.0] — 2026-06-26 — Universal Installer
 
 ### Added
 - Agent Skills Open Standard frontmatter (name, description, version, license, allowed-tools) on all 15 skills

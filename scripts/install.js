@@ -227,7 +227,26 @@ function autoDetect() {
 const args = process.argv.slice(2);
 const withExtras = args.includes('--with-extras');
 const isAuto = args.includes('--auto');
+const noMcp = args.includes('--no-mcp');
 const explicitTarget = args.find(a => !a.startsWith('--'));
+
+function configureMcp() {
+  if (noMcp) {
+    console.log('  ℹ️  MCP configuration skipped (--no-mcp)');
+    return;
+  }
+  console.log('  Configuring MCP servers...');
+  try {
+    const mcpScript = path.join(__dirname, 'mcp-config.js');
+    if (fs.existsSync(mcpScript)) {
+      require(mcpScript);
+    } else {
+      console.log('  (mcp-config.js not found)');
+    }
+  } catch (e) {
+    console.log(`  ℹ️  MCP config skipped: ${e.message}`);
+  }
+}
 
 if (isAuto) {
   const detected = autoDetect();
@@ -239,9 +258,11 @@ if (isAuto) {
       install(target, withExtras);
     }
   }
+  if (withExtras) configureMcp();
   saveState(withExtras);
 } else if (explicitTarget) {
   install(explicitTarget, withExtras);
+  if (withExtras) configureMcp();
   saveState(withExtras);
 } else {
   console.log('Usage: node scripts/install.js [--target <agent>] [--with-extras] [--auto]');
